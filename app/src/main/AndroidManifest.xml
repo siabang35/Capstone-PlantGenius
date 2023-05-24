@@ -19,6 +19,9 @@
         android:theme="@style/Theme.APlantGenius"
         tools:targetApi="31">
         <activity
+            android:name=".New"
+            android:exported="false" />
+        <activity
             android:name=".DetailActivity"
             android:exported="false" />
         <activity
