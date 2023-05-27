@@ -1,10 +1,11 @@
-package com.kotlin.aplantgenius
+package com.kotlin.aplantgenius.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.kotlin.aplantgenius.R
 import com.kotlin.aplantgenius.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

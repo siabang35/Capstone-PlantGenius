@@ -1,4 +1,4 @@
-package com.kotlin.aplantgenius
+package com.kotlin.aplantgenius.diseases
 
 import android.content.Intent
 import android.os.Build
@@ -13,6 +13,8 @@ import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
+import com.kotlin.aplantgenius.R
+import com.kotlin.aplantgenius.createFile
 import com.kotlin.aplantgenius.databinding.ActivityCameraBinding
 
 class CameraActivity : AppCompatActivity() {
@@ -60,7 +62,7 @@ class CameraActivity : AppCompatActivity() {
                         "isBackCamera",
                         cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA
                     )
-                    setResult(DiseasesActivity.CAMERA_X_RESULT, intent)
+                    setResult(ScanActivity.CAMERA_X_RESULT, intent)
                     finish()
                 }
             }

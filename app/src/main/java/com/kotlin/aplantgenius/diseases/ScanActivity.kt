@@ -1,4 +1,4 @@
-package com.kotlin.aplantgenius
+package com.kotlin.aplantgenius.diseases
 
 import android.Manifest
 import android.content.Intent
@@ -12,17 +12,20 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.kotlin.aplantgenius.databinding.ActivityDiseasesBinding
+import com.kotlin.aplantgenius.R
+import com.kotlin.aplantgenius.databinding.ActivityScanBinding
+import com.kotlin.aplantgenius.rotateFile
+import com.kotlin.aplantgenius.uriToFile
 import java.io.File
 
-class DiseasesActivity : AppCompatActivity() {
+class ScanActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityDiseasesBinding
+    private lateinit var binding: ActivityScanBinding
     private var getFile: File? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityDiseasesBinding.inflate(layoutInflater)
+        binding = ActivityScanBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
 
