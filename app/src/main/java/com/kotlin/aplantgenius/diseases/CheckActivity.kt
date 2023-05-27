@@ -1,4 +1,4 @@
-package com.kotlin.aplantgenius
+package com.kotlin.aplantgenius.diseases
 
 import android.content.Intent
 import android.os.Bundle

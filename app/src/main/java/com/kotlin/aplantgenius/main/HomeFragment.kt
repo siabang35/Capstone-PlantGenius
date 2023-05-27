@@ -1,4 +1,4 @@
-package com.kotlin.aplantgenius
+package com.kotlin.aplantgenius.main
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.kotlin.aplantgenius.diseases.ScanActivity
 import com.kotlin.aplantgenius.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -24,7 +25,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.started.setOnClickListener {
-            val intent = Intent(requireContext(), DiseasesActivity::class.java)
+            val intent = Intent(requireContext(), ScanActivity::class.java)
             startActivity(intent)
         }
     }

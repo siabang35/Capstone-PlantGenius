@@ -19,22 +19,28 @@
         android:theme="@style/Theme.APlantGenius"
         tools:targetApi="31">
         <activity
+            android:name=".RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".New"
             android:exported="false" />
         <activity
-            android:name=".DetailActivity"
+            android:name=".diseases.DetailActivity"
             android:exported="false" />
         <activity
-            android:name=".CheckActivity"
+            android:name=".diseases.CheckActivity"
             android:exported="false" />
         <activity
-            android:name=".DiseasesActivity"
+            android:name=".diseases.ScanActivity"
             android:exported="false" />
         <activity
-            android:name=".CameraActivity"
+            android:name=".diseases.CameraActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
