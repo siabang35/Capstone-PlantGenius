@@ -1,5 +1,6 @@
 package com.kotlin.aplantgenius.auth
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -77,9 +78,19 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun login(email: String, password: String) {
-        val intent = Intent(this@LoginActivity, MainActivity::class.java)
-        startActivity(intent)
-        finish()
+        val token = "12345678"
+
+        if (token != null) {
+            val sharedPreferences =
+                getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+            editor.putString("token", token)
+            editor.apply()
+
+            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
     private fun isValidEmail(email: String): Boolean {

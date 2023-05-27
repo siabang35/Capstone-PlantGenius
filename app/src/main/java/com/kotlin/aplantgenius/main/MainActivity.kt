@@ -1,5 +1,6 @@
 package com.kotlin.aplantgenius.main
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -24,7 +25,8 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.fragmentContainer) as NavHostFragment
         navController = navHostFragment.navController
 
-        val token = null
+        val sharedPref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val token = sharedPref.getString("token", null)
 
         if (token == null) {
             val intent = Intent(this, LoginActivity::class.java)

@@ -68,6 +68,10 @@ class RegisterActivity : AppCompatActivity() {
             }
         })
 
+        binding.backButton.setOnClickListener {
+            finish()
+        }
+
         binding.registerButton.setOnClickListener {
             val name = binding.registerName.text.toString()
             val email = binding.registerEmail.text.toString()
@@ -91,8 +95,8 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun register(name: String, email: String, password: String) {
-
-        val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
+        val intent = Intent(this, LoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
         finish()
     }
