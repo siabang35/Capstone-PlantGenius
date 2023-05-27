@@ -13,10 +13,12 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
-    <style name="Theme.APlantGenius.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+
+    <style name="TextInputLayoutAppearance" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="shapeAppearanceOverlay">@style/RoundedCorner</item>
     </style>
-    <style name="Theme.APlantGenius.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-    <style name="Theme.APlantGenius.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="RoundedCorner">
+        <item name="cornerSize">25dp</item>
+    </style>
 </resources>
