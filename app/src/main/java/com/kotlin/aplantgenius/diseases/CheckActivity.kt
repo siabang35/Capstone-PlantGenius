@@ -14,7 +14,7 @@ class CheckActivity : AppCompatActivity() {
         binding = ActivityCheckBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btnDetail.setOnClickListener {
+        binding.detailButton.setOnClickListener {
             val intent = Intent(this, DetailActivity::class.java)
             startActivity(intent)
         }
