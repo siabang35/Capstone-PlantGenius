@@ -1,4 +1,4 @@
-package com.kotlin.aplantgenius.main
+package com.kotlin.aplantgenius.main.home
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.kotlin.aplantgenius.diseases.ScanActivity
+import com.kotlin.aplantgenius.diseases.scan.ScanActivity
 import com.kotlin.aplantgenius.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {

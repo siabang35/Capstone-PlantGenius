@@ -1,4 +1,4 @@
-package com.kotlin.aplantgenius.main
+package com.kotlin.aplantgenius.main.profile
 
 import android.content.Context
 import android.content.Intent

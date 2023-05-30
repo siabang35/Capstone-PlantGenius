@@ -25,16 +25,16 @@
             android:name=".auth.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".diseases.DetailActivity"
+            android:name=".diseases.detail.DetailActivity"
             android:exported="false" />
         <activity
-            android:name=".diseases.CheckActivity"
+            android:name=".diseases.check.CheckActivity"
             android:exported="false" />
         <activity
-            android:name=".diseases.ScanActivity"
+            android:name=".diseases.scan.ScanActivity"
             android:exported="false" />
         <activity
-            android:name=".diseases.CameraActivity"
+            android:name=".diseases.scan.CameraActivity"
             android:exported="false" />
         <activity
             android:name=".main.MainActivity"

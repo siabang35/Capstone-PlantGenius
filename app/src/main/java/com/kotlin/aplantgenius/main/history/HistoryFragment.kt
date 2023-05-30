@@ -1,4 +1,4 @@
-package com.kotlin.aplantgenius.main
+package com.kotlin.aplantgenius.main.history
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -1,4 +1,4 @@
-package com.kotlin.aplantgenius.diseases
+package com.kotlin.aplantgenius.diseases.scan
 
 import android.content.Intent
 import android.os.Build
@@ -14,7 +14,7 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import com.kotlin.aplantgenius.R
-import com.kotlin.aplantgenius.createFile
+import com.kotlin.aplantgenius.data.createFile
 import com.kotlin.aplantgenius.databinding.ActivityCameraBinding
 
 class CameraActivity : AppCompatActivity() {
