@@ -1,4 +1,4 @@
-package com.kotlin.aplantgenius.diseases
+package com.kotlin.aplantgenius.diseases.scan
 
 import android.Manifest
 import android.content.Intent
@@ -14,8 +14,9 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.kotlin.aplantgenius.R
 import com.kotlin.aplantgenius.databinding.ActivityScanBinding
-import com.kotlin.aplantgenius.rotateFile
-import com.kotlin.aplantgenius.uriToFile
+import com.kotlin.aplantgenius.data.rotateFile
+import com.kotlin.aplantgenius.data.uriToFile
+import com.kotlin.aplantgenius.diseases.check.CheckActivity
 import java.io.File
 
 class ScanActivity : AppCompatActivity() {

@@ -1,4 +1,4 @@
-package com.kotlin.aplantgenius
+package com.kotlin.aplantgenius.data
 
 import android.app.Application
 import android.content.ContentResolver
@@ -8,11 +8,13 @@ import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.net.Uri
 import android.os.Environment
+import com.kotlin.aplantgenius.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
+import android.util.Base64
 
 private const val FILENAME_FORMAT = "dd-MMM-yyyy"
 
@@ -65,7 +67,7 @@ fun uriToFile(selectedImg: Uri, context: Context): File {
     return myFile
 }
 
-suspend fun reduceFileImage(file: File): File = withContext(Dispatchers.IO) {
+suspend fun compress(file: File): File = withContext(Dispatchers.IO) {
     val bitmap = BitmapFactory.decodeFile(file.path)
 
     var compressQuality = 100
@@ -82,4 +84,16 @@ suspend fun reduceFileImage(file: File): File = withContext(Dispatchers.IO) {
     bitmap.compress(Bitmap.CompressFormat.JPEG, compressQuality, FileOutputStream(file))
 
     file
+}
+
+suspend fun imageToBase64(file: File): String = withContext(Dispatchers.IO) {
+    val bitmap = BitmapFactory.decodeFile(file.path)
+
+    val outputStream = ByteArrayOutputStream()
+    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+    val byteArray = outputStream.toByteArray()
+
+    val base64Image = Base64.encodeToString(byteArray, Base64.DEFAULT)
+
+    base64Image
 }

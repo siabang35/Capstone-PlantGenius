@@ -1,9 +1,10 @@
-package com.kotlin.aplantgenius.diseases
+package com.kotlin.aplantgenius.diseases.detail
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.kotlin.aplantgenius.databinding.ActivityDetailBinding
+import com.kotlin.aplantgenius.diseases.scan.ScanActivity
 import com.kotlin.aplantgenius.main.MainActivity
 
 class DetailActivity : AppCompatActivity() {

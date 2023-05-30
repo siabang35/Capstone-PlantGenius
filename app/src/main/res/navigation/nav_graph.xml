@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/menu_home"
-        android:name="com.kotlin.aplantgenius.main.HomeFragment"
+        android:name="com.kotlin.aplantgenius.main.home.HomeFragment"
         android:label="Home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/menu_history"
-        android:name="com.kotlin.aplantgenius.main.HistoryFragment"
+        android:name="com.kotlin.aplantgenius.main.history.HistoryFragment"
         android:label="History"
         tools:layout="@layout/fragment_history" />
 
     <fragment
         android:id="@+id/menu_profile"
-        android:name="com.kotlin.aplantgenius.main.ProfileFragment"
+        android:name="com.kotlin.aplantgenius.main.profile.ProfileFragment"
         android:label="Profile"
         tools:layout="@layout/fragment_profile" />
 
