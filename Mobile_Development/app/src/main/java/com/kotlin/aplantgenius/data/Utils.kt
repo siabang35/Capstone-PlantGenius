@@ -86,7 +86,7 @@ suspend fun compress(file: File): File = withContext(Dispatchers.IO) {
     file
 }
 
-suspend fun imageToBase64(file: File): String = withContext(Dispatchers.IO) {
+suspend fun base64(file: File): String = withContext(Dispatchers.IO) {
     val bitmap = BitmapFactory.decodeFile(file.path)
 
     val outputStream = ByteArrayOutputStream()
