@@ -67,9 +67,10 @@
                 app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 
+
             <Button
                 android:id="@+id/btn_to_check"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:background="@drawable/rounded_button_bg"
@@ -78,7 +79,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cameraXButton" />
-
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline"

@@ -8,12 +8,13 @@
 
     <Button
         android:id="@+id/started"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="70dp"
+        android:background="@drawable/rounded_button_bg"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:backgroundTint="@color/green"
-        android:text="@string/get_started"
+        android:text="Scan Plant"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
