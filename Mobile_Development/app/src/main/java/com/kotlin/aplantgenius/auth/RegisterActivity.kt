@@ -71,6 +71,9 @@ class RegisterActivity : AppCompatActivity() {
         binding.backButton.setOnClickListener {
             finish()
         }
+        binding.backText.setOnClickListener {
+            finish()
+        }
 
         binding.registerButton.setOnClickListener {
             val name = binding.registerName.text.toString()

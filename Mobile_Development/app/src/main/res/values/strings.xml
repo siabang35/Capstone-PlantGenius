@@ -31,4 +31,5 @@
     <string name="invalid_email">Invalid email</string>
     <string name="invalid_password">Password minimal 8 karakter</string>
     <string name="invalid_name">Nama tidak boleh kosong</string>
+    <string name="detail">Detail</string>
 </resources>
