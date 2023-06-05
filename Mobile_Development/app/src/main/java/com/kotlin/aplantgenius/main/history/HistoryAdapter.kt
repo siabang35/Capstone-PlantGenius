@@ -52,7 +52,7 @@ class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
                     .load(user.photo)
                     .into(ivPhoto)
                 tvName.text = user.name
-                tvDes.text = user.description
+                tvDes.text = user.desc
                 itemView.setOnClickListener { onItemClickCallback?.onItemClicked(user) }
 
             }

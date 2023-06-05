@@ -5,14 +5,24 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.gson.Gson
 import com.kotlin.aplantgenius.R
+import com.kotlin.aplantgenius.data.ApiConfig
+import com.kotlin.aplantgenius.data.LoginErrorResponse
+import com.kotlin.aplantgenius.data.LoginRequest
+import com.kotlin.aplantgenius.data.LoginResponse
 import com.kotlin.aplantgenius.databinding.ActivityLoginBinding
 import com.kotlin.aplantgenius.main.MainActivity
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
+    //private val viewModel: LoginViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,7 +31,7 @@ class LoginActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
-        binding.loginEmail.addTextChangedListener(object : TextWatcher {
+        binding.loginPhoneEmail.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
             }
 
@@ -29,11 +39,18 @@ class LoginActivity : AppCompatActivity() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (!isValidEmail(s.toString())) {
-                    binding.emailLayout.error = getString(R.string.invalid_email)
-                    binding.emailLayout.errorIconDrawable = null
+                val input = s.toString().trim()
+
+                if (input.isNotEmpty()) {
+                    if (isValidEmail(input)) {
+                        binding.phoneEmailLayout.error = null
+                    } else if (isValidPhone(input)) {
+                        binding.phoneEmailLayout.error = null
+                    } else {
+                        binding.phoneEmailLayout.error = getString(R.string.invalid_phone_email)
+                    }
                 } else {
-                    binding.emailLayout.error = null
+                    binding.phoneEmailLayout.error = null
                 }
             }
         })
@@ -46,7 +63,9 @@ class LoginActivity : AppCompatActivity() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (s.toString().length < 8) {
+                val password = s.toString().trim()
+
+                if (password.length < 6 || !isValidPassword(password)) {
                     binding.passLayout.error = getString(R.string.invalid_password)
                     binding.passLayout.errorIconDrawable = null
                 } else {
@@ -56,16 +75,16 @@ class LoginActivity : AppCompatActivity() {
         })
 
         binding.loginButton.setOnClickListener {
-            val email = binding.loginEmail.text.toString()
+            val phoneEmail = binding.loginPhoneEmail.text.toString()
             val password = binding.loginPassword.text.toString()
 
-            if (isValidEmail(email) && password.length >= 8) {
-                login(email, password)
+            if (phoneEmail.isNotEmpty() && password.length >= 6) {
+                login(phoneEmail, password)
             } else {
-                if (!isValidEmail(email)) {
-                    binding.emailLayout.error = getString(R.string.invalid_email)
+                if (phoneEmail.isEmpty()) {
+                    binding.phoneEmailLayout.error = getString(R.string.invalid_phone_email)
                 }
-                if (password.length < 8) {
+                if (password.length < 6) {
                     binding.passLayout.error = getString(R.string.invalid_password)
                 }
             }
@@ -78,22 +97,49 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun login(email: String, password: String) {
-        val token = "12345678"
+        val request = LoginRequest(email, password)
+        val call = ApiConfig().getApi().loginUser(request)
 
-        if (token != null) {
-            val sharedPreferences =
-                getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-            val editor = sharedPreferences.edit()
-            editor.putString("token", token)
-            editor.apply()
+        call.enqueue(object : Callback<LoginResponse> {
+            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+                if (response.isSuccessful) {
+                    val token = response.body()?.toString()
+                    if (token != null) {
+                        val sharedPreferences =
+                            getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+                        val editor = sharedPreferences.edit()
+                        editor.putString("token", token)
+                        editor.apply()
 
-            val intent = Intent(this@LoginActivity, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
+                        val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }
+
+                } else {
+                    val errorResponse = response.errorBody()?.string()
+                    val error = Gson().fromJson(errorResponse, LoginErrorResponse::class.java)
+                    val errorMessage = error?.message
+                    Toast.makeText(this@LoginActivity, errorMessage, Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                Toast.makeText(this@LoginActivity, t.message, Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     private fun isValidEmail(email: String): Boolean {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    }
+
+    private fun isValidPhone(phoneNumber: String): Boolean {
+        return phoneNumber.matches(Regex("\\d{10,}"))
+    }
+
+    private fun isValidPassword(password: String): Boolean {
+        val pattern = Regex("(?=.*\\d)(?=.*[a-zA-Z\\p{Punct}]).+")
+        return pattern.matches(password)
     }
 }

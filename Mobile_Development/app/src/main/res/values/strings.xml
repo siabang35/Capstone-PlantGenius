@@ -21,13 +21,22 @@
     <string name="login">Login</string>
     <string name="inputPassword">Masukan password</string>
     <string name="password">Password</string>
-    <string name="inputEmail">Masukan Email</string>
-    <string name="name">Name</string>
+    <string name="inputEmail">Masukan email</string>
+    <string name="name">Nama</string>
     <string name="createAccount">Create Account</string>
     <string name="inputName">Masukan nama</string>
     <string name="signup">Sign Up</string>
-    <string name="invalid_email">Invalid email</string>
-    <string name="invalid_password">Password minimal 8 karakter</string>
+    <string name="invalid_email">Masukan email dengan benar</string>
+    <string name="invalid_password">Minimal 6 karakter. kombinasi huruf dan angka</string>
     <string name="invalid_name">Nama tidak boleh kosong</string>
+    <string name="invalid_nameNumber">Tidak boleh ada angka atau simbol</string>
     <string name="detail">Detail</string>
+    <string name="noPhone">Nomor Telepon</string>
+    <string name="inputPhone">Masukan nomor telephon</string>
+    <string name="invalid_phone">Masukan nomor dengan benar</string>
+    <string name="accCreated">Pendaftaran berhasil</string>
+    <string name="phoneEmail">Nomor telepone / Email</string>
+    <string name="inputPhoneEmail">Masukan nomor atau email</string>
+    <string name="invalid_phone_email">Masukan nomor atau email dengan benar</string>
+    <string name="alreadyPhoneEmail">Nomor atau Email sudah terdaftar</string>
 </resources>
