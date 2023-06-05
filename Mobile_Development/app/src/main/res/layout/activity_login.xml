@@ -37,31 +37,31 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvLogin" />
 
             <TextView
-                android:id="@+id/emailView"
+                android:id="@+id/phoneEmailView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="@string/email"
+                android:text="@string/phoneEmail"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/emailLayout"
+                android:id="@+id/phoneEmailLayout"
                 style="@style/TextInputLayoutAppearance"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/emailView"
-                app:startIconDrawable="@drawable/ic_baseline_email_24">
+                app:layout_constraintTop_toBottomOf="@+id/phoneEmailView"
+                app:startIconDrawable="@drawable/ic_baseline_person_24">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/loginEmail"
+                    android:id="@+id/loginPhoneEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:hint="@string/inputEmail"
-                    android:inputType="textEmailAddress"
+                    android:hint="@string/inputPhoneEmail"
+                    android:inputType="text"
                     tools:ignore="SpeakableTextPresentCheck" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -72,7 +72,7 @@
                 android:layout_marginTop="8dp"
                 android:text="@string/password"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/emailLayout" />
+                app:layout_constraintTop_toBottomOf="@+id/phoneEmailLayout" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/passLayout"
