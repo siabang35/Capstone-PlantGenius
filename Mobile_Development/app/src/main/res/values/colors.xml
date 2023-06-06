@@ -7,10 +7,16 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
     <color name="green">#0ABA4E</color>
     <color name="darkGreen">#3F8F00</color>
     <color name="gold">#BF9D58</color>
     <color name="gray">#818181</color>
     <color name="red">#FF0000</color>
 
+    <color name="darkRed">#BA0A0A</color>
+    <color name="turquoiseGreen">#21BAA9</color>
+    <color name="darkGray700">#434343</color>
+    <color name="darkGray">#666666</color>
+    <color name="darkGreen700">#133D38</color>
 </resources>
