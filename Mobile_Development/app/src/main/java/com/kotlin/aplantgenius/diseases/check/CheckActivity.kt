@@ -15,6 +15,10 @@ class CheckActivity : AppCompatActivity() {
         binding = ActivityCheckBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.backCheck.setOnClickListener {
+            finish()
+        }
+
         binding.detailButton.setOnClickListener {
             val intent = Intent(this, DetailActivity::class.java)
             startActivity(intent)
