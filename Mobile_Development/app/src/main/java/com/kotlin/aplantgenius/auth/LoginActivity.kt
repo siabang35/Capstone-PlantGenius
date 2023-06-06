@@ -64,7 +64,7 @@ class LoginActivity : AppCompatActivity() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 val password = s.toString().trim()
-
+            //password minimal 6
                 if (password.length < 6 || !isValidPassword(password)) {
                     binding.passLayout.error = getString(R.string.invalid_password)
                     binding.passLayout.errorIconDrawable = null
