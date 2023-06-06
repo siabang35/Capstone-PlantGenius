@@ -6,14 +6,40 @@
     android:layout_height="match_parent"
     tools:context=".diseases.scan.ScanActivity">
 
-    <ScrollView
-        android:id="@+id/scrollView3"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbarScan"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"
+        android:elevation="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/backScan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_back" />
+
+        <TextView
+            android:id="@+id/barNameScan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:text="Plant Genius"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </com.google.android.material.appbar.MaterialToolbar>
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarScan">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -23,62 +49,78 @@
 
             <ImageView
                 android:id="@+id/previewImageView"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/plant" />
+                app:srcCompat="@drawable/image_scan" />
 
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="@string/textDiseases"
-                android:textColor="@color/green"
+                android:text="Silahkan pilih gambar Tanaman Anda!"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/previewImageView" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/cameraXButton"
-                android:layout_width="0dp"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="24dp"
-                android:backgroundTint="@color/darkGreen"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="28dp"
+                android:padding="10dp"
+                android:backgroundTint="@color/darkGreen700"
+                android:elevation="10dp"
                 android:gravity="center"
                 android:text="@string/camera"
+                app:cornerRadius="10dp"
                 app:layout_constraintEnd_toStartOf="@+id/guideline"
-                app:layout_constraintStart_toStartOf="@+id/previewImageView"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/galleryButton"
-                android:layout_width="0dp"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
-                android:backgroundTint="@color/darkGreen"
+                android:layout_marginStart="28dp"
+                android:padding="10dp"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="@color/darkGreen700"
+                android:elevation="10dp"
                 android:text="@string/gallery"
-                app:layout_constraintEnd_toEndOf="@+id/previewImageView"
+                app:cornerRadius="10dp"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-
-            <Button
-                android:id="@+id/btn_to_check"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:background="@drawable/rounded_button_bg"
-                android:backgroundTint="@color/green"
-                android:text="@string/checkDiseases"
+                android:layout_marginTop="24dp"
+                android:text="Cek kondisi Tanaman Anda Sekarang Juga!"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cameraXButton" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_to_check"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/darkRed"
+                android:elevation="10dp"
+                android:padding="10dp"
+                android:text="DETEKSI"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:cornerRadius="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline"

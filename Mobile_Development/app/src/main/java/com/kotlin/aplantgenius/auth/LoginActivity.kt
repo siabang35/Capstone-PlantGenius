@@ -104,6 +104,7 @@ class LoginActivity : AppCompatActivity() {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 if (response.isSuccessful) {
                     val token = response.body()?.toString()
+
                     if (token != null) {
                         val sharedPreferences =
                             getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
@@ -125,7 +126,7 @@ class LoginActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                Toast.makeText(this@LoginActivity, t.message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@LoginActivity, getString(R.string.failServer), Toast.LENGTH_SHORT).show()
             }
         })
     }

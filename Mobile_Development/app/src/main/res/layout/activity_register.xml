@@ -8,19 +8,19 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:focusableInTouchMode="true"
-            android:padding="60dp">
+            android:padding="40dp">
 
             <Button
                 android:id="@+id/backButton"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:layout_marginTop="32dp"
                 android:background="@drawable/ic_baseline_arrow_back_24"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -28,157 +28,142 @@
             <TextView
                 android:id="@+id/backText"
                 android:layout_width="wrap_content"
-                android:layout_height="23dp"
+                android:layout_height="24dp"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="33dp"
+                android:gravity="center"
                 android:text="Back"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/logo_app"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/backText" />
 
             <TextView
                 android:id="@+id/title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="@string/createAccount"
+                android:text="Buat Akun"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/backButton" />
+                app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
-            <TextView
-                android:id="@+id/nameView"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/input"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/name"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/title" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/nameLayout"
-                style="@style/TextInputLayoutAppearance"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/nameView"
-                app:startIconDrawable="@drawable/ic_baseline_person_24">
+                app:layout_constraintTop_toBottomOf="@+id/title">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/registerName"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/nameLayout"
+                    style="@style/TextInputLayoutAppearance"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="text"
-                    android:hint="@string/inputName"
-                    tools:ignore="SpeakableTextPresentCheck" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_marginTop="5dp"
+                    app:boxStrokeWidth="2dp"
+                    app:boxStrokeColor="@color/gold"
+                    app:startIconDrawable="@drawable/ic_baseline_person_24">
 
-            <TextView
-                android:id="@+id/phoneView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/noPhone"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/nameLayout" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/registerName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/inputName"
+                        android:inputType="text"
+                        tools:ignore="SpeakableTextPresentCheck" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/phoneLayout"
-                style="@style/TextInputLayoutAppearance"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/phoneView"
-                app:startIconDrawable="@drawable/ic_baseline_phone_24">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/registerPhone"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/phoneLayout"
+                    style="@style/TextInputLayoutAppearance"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="@string/inputPhone"
-                    android:inputType="phone"
-                    tools:ignore="SpeakableTextPresentCheck" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_marginTop="20dp"
+                    app:boxStrokeWidth="2dp"
+                    app:boxStrokeColor="@color/gold"
+                    app:startIconDrawable="@drawable/ic_baseline_phone_24">
 
-            <TextView
-                android:id="@+id/emailView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/email"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/phoneLayout" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/registerPhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/inputPhone"
+                        android:inputType="phone"
+                        tools:ignore="SpeakableTextPresentCheck" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/emailLayout"
-                style="@style/TextInputLayoutAppearance"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/emailView"
-                app:startIconDrawable="@drawable/ic_baseline_email_24">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/registerEmail"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/emailLayout"
+                    style="@style/TextInputLayoutAppearance"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="@string/inputEmail"
-                    android:inputType="textEmailAddress"
-                    tools:ignore="SpeakableTextPresentCheck" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_marginTop="20dp"
+                    app:boxStrokeWidth="2dp"
+                    app:boxStrokeColor="@color/gold"
+                    app:startIconDrawable="@drawable/ic_baseline_email_24">
 
-            <TextView
-                android:id="@+id/passView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/password"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/emailLayout" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/registerEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/inputEmail"
+                        android:inputType="textEmailAddress"
+                        tools:ignore="SpeakableTextPresentCheck" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/passLayout"
-                style="@style/TextInputLayoutAppearance"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/passView"
-                app:passwordToggleEnabled="true"
-                app:startIconDrawable="@drawable/ic_baseline_lock_24">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/registerPassword"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/passLayout"
+                    style="@style/TextInputLayoutAppearance"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="@string/inputPassword"
-                    android:inputType="textPassword"
+                    android:layout_marginTop="20dp"
+                    app:boxStrokeWidth="2dp"
+                    app:boxStrokeColor="@color/gold"
                     app:passwordToggleEnabled="true"
-                    tools:ignore="SpeakableTextPresentCheck" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    app:startIconDrawable="@drawable/ic_baseline_lock_24">
 
-            <Button
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/registerPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/inputPassword"
+                        android:inputType="textPassword"
+                        app:passwordToggleEnabled="true"
+                        tools:ignore="SpeakableTextPresentCheck" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/registerButton"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
+                android:backgroundTint="@color/darkGreen700"
+                android:elevation="10dp"
+                android:padding="13dp"
                 android:text="@string/signup"
-                android:background="@drawable/rounded_button_bg"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:cornerRadius="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/passLayout" />
+                app:layout_constraintTop_toBottomOf="@+id/input" />
 
             <ProgressBar
                 android:id="@+id/progressBar"
@@ -193,4 +178,13 @@
                 tools:visibility="visible" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/image_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

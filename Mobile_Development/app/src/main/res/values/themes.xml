@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.APlantGenius" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/green</item>
+        <item name="colorPrimary">@color/turquoiseGreen</item>
         <item name="colorPrimaryVariant">@color/gold</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
@@ -17,10 +17,10 @@
     <style name="TextInputLayoutAppearance" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="boxBackgroundColor">@color/white</item>
         <item name="boxStrokeColor">@color/green</item>
-        <item name="boxCornerRadiusTopStart">25dp</item>
-        <item name="boxCornerRadiusTopEnd">25dp</item>
-        <item name="boxCornerRadiusBottomStart">25dp</item>
-        <item name="boxCornerRadiusBottomEnd">25dp</item>
+        <item name="boxCornerRadiusTopStart">20dp</item>
+        <item name="boxCornerRadiusTopEnd">20dp</item>
+        <item name="boxCornerRadiusBottomStart">20dp</item>
+        <item name="boxCornerRadiusBottomEnd">20dp</item>
     </style>
 
 </resources>

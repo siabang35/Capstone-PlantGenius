@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">APlantGenius</string>
+    <string name="app_name">PlantGenius</string>
     <string name="errorPhoto">Gagal mengambil gambar</string>
     <string name="errorCamera">Tidak dapat membuka kamera</string>
     <string name="takePicture">Ambil gambar</string>
@@ -7,24 +7,16 @@
     <string name="gallery">Galeri</string>
     <string name="checkDiseases">Cek Penyakit</string>
     <string name="textDiseases">Choose your plant picture!</string>
-    <string name="get_started">Get Started</string>
     <string name="getPermission">Permission didapatkan</string>
     <string name="noPermission">Tidak mendapatkan Permission</string>
-    <string name="title_activity_detail">DetailActivity</string>
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="email">Email</string>
     <string name="login">Login</string>
-    <string name="inputPassword">Masukan password</string>
+    <string name="inputPassword">Password</string>
     <string name="password">Password</string>
-    <string name="inputEmail">Masukan email</string>
+    <string name="inputEmail">Email</string>
     <string name="name">Nama</string>
     <string name="createAccount">Create Account</string>
-    <string name="inputName">Masukan nama</string>
+    <string name="inputName">Nama</string>
     <string name="signup">Sign Up</string>
     <string name="invalid_email">Masukan email dengan benar</string>
     <string name="invalid_password">Minimal 6 karakter. kombinasi huruf dan angka</string>
@@ -32,11 +24,11 @@
     <string name="invalid_nameNumber">Tidak boleh ada angka atau simbol</string>
     <string name="detail">Detail</string>
     <string name="noPhone">Nomor Telepon</string>
-    <string name="inputPhone">Masukan nomor telephon</string>
+    <string name="inputPhone">Telephon</string>
     <string name="invalid_phone">Masukan nomor dengan benar</string>
     <string name="accCreated">Pendaftaran berhasil</string>
     <string name="phoneEmail">Nomor telepone / Email</string>
-    <string name="inputPhoneEmail">Masukan nomor atau email</string>
-    <string name="invalid_phone_email">Masukan nomor atau email dengan benar</string>
-    <string name="alreadyPhoneEmail">Nomor atau Email sudah terdaftar</string>
+    <string name="inputPhoneEmail">Email</string>
+    <string name="invalid_phone_email">Masukan email dengan benar</string>
+    <string name="failServer">Gagal menghubungkan ke Server</string>
 </resources>

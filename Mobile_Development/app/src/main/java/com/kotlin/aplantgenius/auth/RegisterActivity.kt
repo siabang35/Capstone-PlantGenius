@@ -142,8 +142,7 @@ class RegisterActivity : AppCompatActivity() {
             ) {
                 if (response.isSuccessful) {
                     Toast.makeText(
-                        this@RegisterActivity,
-                        getString(R.string.accCreated),
+                        this@RegisterActivity, getString(R.string.accCreated),
                         Toast.LENGTH_SHORT
                     )
                         .show()
@@ -156,14 +155,16 @@ class RegisterActivity : AppCompatActivity() {
                     val error = Gson().fromJson(errorResponse, ErrorRegister::class.java)
                     val errorMessage = error.details.getErrorMessage()
                     Toast.makeText(this@RegisterActivity, errorMessage, Toast.LENGTH_SHORT).show()
-
                 }
             }
 
             override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
-                Toast.makeText(this@RegisterActivity, t.message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this@RegisterActivity,
+                    getString(R.string.failServer),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
-
         })
     }
 

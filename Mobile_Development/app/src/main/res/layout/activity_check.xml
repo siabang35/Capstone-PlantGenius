@@ -6,12 +6,40 @@
     android:layout_height="match_parent"
     tools:context=".diseases.check.CheckActivity">
 
-    <ScrollView
-        android:id="@+id/scrollView2"
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbarCheck"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="80dp"
-        app:layout_constraintBottom_toBottomOf="parent">
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"
+        android:elevation="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/backCheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_back" />
+
+        <TextView
+            android:id="@+id/barNameCheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:text="Plant Genius"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </com.google.android.material.appbar.MaterialToolbar>
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarCheck">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -21,20 +49,23 @@
 
             <ImageView
                 android:id="@+id/ImageView"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/plant2" />
+                app:srcCompat="@drawable/image_check" />
 
             <TextView
                 android:id="@+id/titleView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="RESULT CHECK"
+                android:layout_marginTop="32dp"
+                android:text="HASIL DETEKSI"
+                android:textColor="@color/red"
+                android:textSize="15sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ImageView" />
@@ -46,23 +77,28 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="24dp"
                 android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut orci auctor, ultrices sapien eu, laoreet metus. Etiam auctor tellus ut quam lacinia, ac congue massa scelerisque. Sed quis diam id nisi venenatis commodo. Proin vel lacus id augue hendrerit lobortis. Nunc quis mauris vel turpis consectetur luctus. Nullam feugiat euismod enim, vel molestie ipsum bibendum."
+                android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.25"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/titleView" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/detailButton"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="24dp"
-        android:background="@drawable/rounded_button_bg"
+        android:backgroundTint="@color/turquoiseGreen"
+        android:elevation="10dp"
+        android:padding="10dp"
         android:text="@string/detail"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
