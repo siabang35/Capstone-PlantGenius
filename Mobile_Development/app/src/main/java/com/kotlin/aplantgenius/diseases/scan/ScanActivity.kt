@@ -37,6 +37,9 @@ class ScanActivity : AppCompatActivity() {
                 REQUEST_CODE_PERMISSIONS,
             )
         }
+        binding.backScan.setOnClickListener {
+            finish()
+        }
 
         binding.cameraXButton.setOnClickListener { startCameraX() }
 
