@@ -37,8 +37,8 @@ class HistoryFragment : Fragment() {
             ),
             ListHistory("Item 2", drawable, "Description 2", "2"),
             ListHistory("Item 3", drawable, "Description 3", "3"),
-            //ListHistory("Item 4", drawable, "Description 4", "4"),
-            //ListHistory("Item 5", drawable, "Description 5", "5")
+            ListHistory("Item 4", drawable, "Description 4", "4"),
+            ListHistory("Item 5", drawable, "Description 5", "5")
         )
 
         adapter = HistoryAdapter()

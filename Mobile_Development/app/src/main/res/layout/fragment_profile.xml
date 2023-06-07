@@ -39,7 +39,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:text="GENIUS 1.0"
-                    android:textColor="@color/darkGreen700"
+                    android:textColor="?attr/colorSecondary"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
@@ -82,7 +82,7 @@
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:backgroundTint="@color/darkRed"
+                android:backgroundTint="?attr/colorSecondary"
                 android:elevation="10dp"
                 android:padding="10dp"
                 android:text="Logout"

@@ -32,9 +32,9 @@ class ProfileFragment : Fragment() {
             binding.logoutButton.setOnClickListener {
                 with(sharedPref.edit()) {
                     remove("token")
-                    putBoolean("isLoggedIn", false)
                     apply()
                 }
+
                 val intent = Intent(requireContext(), LoginActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                 startActivity(intent)

@@ -1,4 +1,5 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="item_spacing">8dp</dimen>
+    <dimen name="box_corner">20dp</dimen>
 </resources>

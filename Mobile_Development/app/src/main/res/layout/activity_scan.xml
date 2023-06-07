@@ -10,7 +10,7 @@
         android:id="@+id/toolbarScan"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/white"
+        android:background="?attr/colorOnSecondary"
         android:elevation="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,7 +45,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:focusableInTouchMode="true"
-            android:padding="32dp">
+            android:padding="32dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintStart_toStartOf="@+id/guideline">
 
             <ImageView
                 android:id="@+id/previewImageView"
@@ -73,10 +75,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="28dp"
-                android:padding="10dp"
-                android:backgroundTint="@color/darkGreen700"
+                android:backgroundTint="?attr/colorPrimary"
                 android:elevation="10dp"
                 android:gravity="center"
+                android:padding="10dp"
                 android:text="@string/camera"
                 app:cornerRadius="10dp"
                 app:layout_constraintEnd_toStartOf="@+id/guideline"
@@ -87,10 +89,10 @@
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
-                android:padding="10dp"
                 android:layout_marginTop="8dp"
-                android:backgroundTint="@color/darkGreen700"
+                android:backgroundTint="?attr/colorPrimary"
                 android:elevation="10dp"
+                android:padding="10dp"
                 android:text="@string/gallery"
                 app:cornerRadius="10dp"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
@@ -110,7 +112,7 @@
                 android:id="@+id/btn_to_check"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/darkRed"
+                android:backgroundTint="?attr/colorSecondary"
                 android:elevation="10dp"
                 android:padding="10dp"
                 android:text="DETEKSI"
@@ -120,7 +122,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView9" />
-
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline"

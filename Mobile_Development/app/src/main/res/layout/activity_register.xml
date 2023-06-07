@@ -10,20 +10,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:focusableInTouchMode="true"
             android:padding="40dp">
 
-            <Button
+            <ImageView
                 android:id="@+id/backButton"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:background="@drawable/ic_baseline_arrow_back_24"
+                android:contentDescription="Tombol kembali"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_back"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"/>
 
             <TextView
                 android:id="@+id/backText"
@@ -47,13 +47,12 @@
 
             <TextView
                 android:id="@+id/title"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:text="Buat Akun"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
@@ -72,8 +71,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    app:boxStrokeWidth="2dp"
-                    app:boxStrokeColor="@color/gold"
                     app:startIconDrawable="@drawable/ic_baseline_person_24">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -91,9 +88,7 @@
                     style="@style/TextInputLayoutAppearance"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    app:boxStrokeWidth="2dp"
-                    app:boxStrokeColor="@color/gold"
+                    android:layout_marginTop="5dp"
                     app:startIconDrawable="@drawable/ic_baseline_phone_24">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -111,9 +106,7 @@
                     style="@style/TextInputLayoutAppearance"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    app:boxStrokeWidth="2dp"
-                    app:boxStrokeColor="@color/gold"
+                    android:layout_marginTop="5dp"
                     app:startIconDrawable="@drawable/ic_baseline_email_24">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -131,9 +124,7 @@
                     style="@style/TextInputLayoutAppearance"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    app:boxStrokeWidth="2dp"
-                    app:boxStrokeColor="@color/gold"
+                    android:layout_marginTop="5dp"
                     app:passwordToggleEnabled="true"
                     app:startIconDrawable="@drawable/ic_baseline_lock_24">
 
@@ -153,7 +144,7 @@
                 android:id="@+id/registerButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="16dp"
                 android:backgroundTint="@color/darkGreen700"
                 android:elevation="10dp"
                 android:padding="13dp"
@@ -171,6 +162,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
+                android:indeterminateTint="?attr/colorTertiary"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
