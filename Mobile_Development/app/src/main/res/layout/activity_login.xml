@@ -15,28 +15,40 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:focusableInTouchMode="true"
-            android:padding="60dp">
+            android:padding="50dp">
 
             <ImageView
                 android:id="@+id/imageView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginBottom="32dp"
                 android:src="@drawable/logo_app"
+                app:layout_constraintBottom_toTopOf="@+id/tvLogin"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <ToggleButton
+                android:id="@+id/dark_mode"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="@drawable/theme_toggle"
+                android:backgroundTint="?attr/colorTertiary"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:textOff=""
+                android:textOn=""
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tvLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
                 android:text="Login"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+                app:layout_constraintBottom_toTopOf="@+id/textView8"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/textView8"
@@ -44,26 +56,25 @@
                 android:layout_height="wrap_content"
                 android:text="Please Sign In to Continue"
                 android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvLogin" />
+                app:layout_constraintBottom_toTopOf="@+id/loginInput"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <LinearLayout
                 android:id="@+id/loginInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView8">
+                app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/phoneEmailLayout"
                     style="@style/TextInputLayoutAppearance"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    app:boxStrokeColor="@color/gold"
-                    app:boxStrokeWidth="2dp"
+                    android:layout_marginTop="10dp"
                     app:startIconDrawable="@drawable/ic_baseline_email_24">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -72,7 +83,7 @@
                         android:layout_height="wrap_content"
                         android:ems="10"
                         android:hint="@string/inputPhoneEmail"
-                        android:inputType="text"
+                        android:inputType="textEmailAddress"
                         tools:ignore="SpeakableTextPresentCheck" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -81,9 +92,7 @@
                     style="@style/TextInputLayoutAppearance"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    app:boxStrokeColor="@color/gold"
-                    app:boxStrokeWidth="2dp"
+                    android:layout_marginTop="5dp"
                     app:passwordToggleEnabled="true"
                     app:startIconDrawable="@drawable/ic_baseline_lock_24">
 
@@ -132,7 +141,7 @@
                 android:clickable="true"
                 android:onClick="signUpClicked"
                 android:text="SIGN UP"
-                android:textColor="@color/red"
+                android:textColor="@color/darkRed"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -144,6 +153,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
+                android:indeterminateTint="?attr/colorTertiary"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

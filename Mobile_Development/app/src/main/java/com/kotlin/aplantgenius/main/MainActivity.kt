@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -20,6 +21,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        getThemeApp()
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainer) as NavHostFragment
@@ -35,5 +37,24 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.bottomBar.setupWithNavController(navController)
+    }
+
+    private fun getThemeApp() {
+        val sharedPref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val theme = sharedPref.getBoolean("theme", false)
+
+        if (theme) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+    }
+
+    fun saveTheme(theme: Boolean) {
+        val sharedPref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        with(sharedPref.edit()) {
+            putBoolean("theme", theme)
+            apply()
+        }
     }
 }

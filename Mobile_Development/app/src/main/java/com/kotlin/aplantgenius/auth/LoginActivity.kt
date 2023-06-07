@@ -5,8 +5,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
+import android.widget.CompoundButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import com.google.gson.Gson
 import com.kotlin.aplantgenius.R
 import com.kotlin.aplantgenius.data.ApiConfig
@@ -28,8 +31,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        supportActionBar?.hide()
+        getThemeApp()
 
         binding.loginPhoneEmail.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
@@ -64,10 +66,14 @@ class LoginActivity : AppCompatActivity() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 val password = s.toString().trim()
-            //password minimal 6
-                if (password.length < 6 || !isValidPassword(password)) {
-                    binding.passLayout.error = getString(R.string.invalid_password)
-                    binding.passLayout.errorIconDrawable = null
+
+                if (password.isNotEmpty()) {
+                    if (password.length < 6 || !isValidPassword(password)) {
+                        binding.passLayout.error = getString(R.string.invalid_password)
+                        binding.passLayout.errorIconDrawable = null
+                    } else {
+                        binding.passLayout.error = null
+                    }
                 } else {
                     binding.passLayout.error = null
                 }
@@ -78,10 +84,10 @@ class LoginActivity : AppCompatActivity() {
             val phoneEmail = binding.loginPhoneEmail.text.toString()
             val password = binding.loginPassword.text.toString()
 
-            if (phoneEmail.isNotEmpty() && password.length >= 6) {
+            if (isValidEmail(phoneEmail) && password.length >= 6) {
                 login(phoneEmail, password)
             } else {
-                if (phoneEmail.isEmpty()) {
+                if (!isValidEmail(phoneEmail)) {
                     binding.phoneEmailLayout.error = getString(R.string.invalid_phone_email)
                 }
                 if (password.length < 6) {
@@ -94,9 +100,20 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
+
+        binding.darkMode.setOnCheckedChangeListener { _: CompoundButton, isChecked: Boolean ->
+            if (isChecked) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                saveTheme(true)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                saveTheme(false)
+            }
+        }
     }
 
     private fun login(email: String, password: String) {
+        binding.progressBar.visibility = View.VISIBLE
         val request = LoginRequest(email, password)
         val call = ApiConfig().getApi().loginUser(request)
 
@@ -106,15 +123,18 @@ class LoginActivity : AppCompatActivity() {
                     val token = response.body()?.toString()
 
                     if (token != null) {
-                        val sharedPreferences =
-                            getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-                        val editor = sharedPreferences.edit()
-                        editor.putString("token", token)
-                        editor.apply()
-
+                        Toast.makeText(this@LoginActivity, "Login Berhasil", Toast.LENGTH_SHORT)
+                            .show()
+                        val shared = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+                        with(shared.edit()) {
+                            putString("token", token)
+                            apply()
+                        }
                         val intent = Intent(this@LoginActivity, MainActivity::class.java)
                         startActivity(intent)
                         finish()
+
+                        binding.progressBar.visibility = View.GONE
                     }
 
                 } else {
@@ -122,13 +142,41 @@ class LoginActivity : AppCompatActivity() {
                     val error = Gson().fromJson(errorResponse, LoginErrorResponse::class.java)
                     val errorMessage = error?.message
                     Toast.makeText(this@LoginActivity, errorMessage, Toast.LENGTH_SHORT).show()
+
+                    binding.progressBar.visibility = View.GONE
                 }
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                Toast.makeText(this@LoginActivity, getString(R.string.failServer), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this@LoginActivity,
+                    getString(R.string.failServer),
+                    Toast.LENGTH_SHORT
+                ).show()
+                binding.progressBar.visibility = View.GONE
             }
         })
+    }
+
+    private fun getThemeApp() {
+        val sharedPref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val theme = sharedPref.getBoolean("theme", false)
+
+        if (theme) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            binding.darkMode.isChecked = true
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            binding.darkMode.isChecked = false
+        }
+    }
+
+    private fun saveTheme(theme: Boolean) {
+        val sharedPref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        with(sharedPref.edit()) {
+            putBoolean("theme", theme)
+            apply()
+        }
     }
 
     private fun isValidEmail(email: String): Boolean {

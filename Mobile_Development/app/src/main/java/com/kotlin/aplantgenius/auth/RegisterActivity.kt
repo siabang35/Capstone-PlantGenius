@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.Gson
@@ -33,12 +34,11 @@ class RegisterActivity : AppCompatActivity() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 val name = s.toString().trim()
+
                 if (name.isEmpty()) {
                     binding.nameLayout.error = getString(R.string.invalid_name)
-                    binding.nameLayout.errorIconDrawable = null
                 } else if (!isValidName(name)) {
                     binding.nameLayout.error = getString(R.string.invalid_nameNumber)
-                    binding.nameLayout.errorIconDrawable = null
                 } else {
                     binding.nameLayout.error = null
                 }
@@ -53,13 +53,18 @@ class RegisterActivity : AppCompatActivity() {
             }
 
             override fun afterTextChanged(s: Editable?) {
-                if (!isValidPhone(s.toString().trim())) {
-                    binding.phoneLayout.error = getString(R.string.invalid_phone)
-                    binding.phoneLayout.errorIconDrawable = null
+                val phone = s.toString().trim()
+
+                if (phone.isNotEmpty()) {
+                    if (!isValidPhone(phone)) {
+                        binding.phoneLayout.error = getString(R.string.invalid_phone)
+                        binding.phoneLayout.errorIconDrawable = null
+                    } else {
+                        binding.phoneLayout.error = null
+                    }
                 } else {
                     binding.phoneLayout.error = null
                 }
-
             }
         })
 
@@ -71,9 +76,15 @@ class RegisterActivity : AppCompatActivity() {
             }
 
             override fun afterTextChanged(s: Editable?) {
-                if (!isValidEmail(s.toString().trim())) {
-                    binding.emailLayout.error = getString(R.string.invalid_email)
-                    binding.emailLayout.errorIconDrawable = null
+                val email = s.toString().trim()
+
+                if (email.isNotEmpty()) {
+                    if (!isValidEmail(email)) {
+                        binding.emailLayout.error = getString(R.string.invalid_email)
+                        binding.emailLayout.errorIconDrawable = null
+                    } else {
+                        binding.emailLayout.error = null
+                    }
                 } else {
                     binding.emailLayout.error = null
                 }
@@ -90,9 +101,13 @@ class RegisterActivity : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 val password = s.toString().trim()
 
-                if (password.length < 6 || !isValidPassword(password)) {
-                    binding.passLayout.error = getString(R.string.invalid_password)
-                    binding.passLayout.errorIconDrawable = null
+                if (password.isNotEmpty()) {
+                    if (password.length < 6 || !isValidPassword(password)) {
+                        binding.passLayout.error = getString(R.string.invalid_password)
+                        binding.passLayout.errorIconDrawable = null
+                    } else {
+                        binding.passLayout.error = null
+                    }
                 } else {
                     binding.passLayout.error = null
                 }
@@ -132,6 +147,7 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun register(name: String, email: String, password: String, phone: String) {
+        binding.progressBar.visibility = View.VISIBLE
         val request = RegisterRequest(name, email, password, phone)
         val call = ApiConfig().getApi().registerUser(request)
 
@@ -150,11 +166,16 @@ class RegisterActivity : AppCompatActivity() {
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
                     startActivity(intent)
                     finish()
+
+                    binding.progressBar.visibility = View.GONE
+
                 } else {
                     val errorResponse = response.errorBody()?.string()
                     val error = Gson().fromJson(errorResponse, ErrorRegister::class.java)
                     val errorMessage = error.details.getErrorMessage()
                     Toast.makeText(this@RegisterActivity, errorMessage, Toast.LENGTH_SHORT).show()
+
+                    binding.progressBar.visibility = View.GONE
                 }
             }
 
@@ -164,6 +185,8 @@ class RegisterActivity : AppCompatActivity() {
                     getString(R.string.failServer),
                     Toast.LENGTH_SHORT
                 ).show()
+
+                binding.progressBar.visibility = View.GONE
             }
         })
     }

@@ -1,26 +1,35 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
-    <style name="Theme.APlantGenius" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.APlantGenius" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/green</item>
-        <item name="colorPrimaryVariant">@color/gold</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorPrimary">@color/darkGreen700</item>
+        <item name="colorPrimaryVariant">@color/darkGray</item>
+        <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorSecondary">@color/darkRed</item>
+        <item name="colorSecondaryVariant">@color/turquoiseGreen</item>
+        <item name="colorOnSecondary">@color/darkGray700</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimary</item>
+        <item name="android:statusBarColor">@color/darkGreen700</item>
         <!-- Customize your theme here. -->
+        <item name="android:colorBackground">@color/darkGray</item>
+        <item name="android:textColor">@color/coconut</item>
+        <item name="colorOnTertiary">@color/coconut</item>
+        <item name="colorAccent">@color/darkGray</item>
+        <item name="colorTertiary">@color/turquoiseGreen</item>
     </style>
 
     <style name="TextInputLayoutAppearance" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-        <item name="boxBackgroundColor">@color/white</item>
-        <item name="boxStrokeColor">@color/green</item>
-        <item name="boxCornerRadiusTopStart">25dp</item>
-        <item name="boxCornerRadiusTopEnd">25dp</item>
-        <item name="boxCornerRadiusBottomStart">25dp</item>
-        <item name="boxCornerRadiusBottomEnd">25dp</item>
+        <item name="boxBackgroundColor">@color/black</item>
+        <item name="boxStrokeColor">@color/turquoiseGreen</item>
+        <item name="hintTextColor">@color/turquoiseGreen</item>
+        <item name="errorTextColor">@color/darkRed</item>
+        <item name="boxStrokeWidth">2dp</item>
+        <item name="errorEnabled">true</item>
+        <item name="boxCornerRadiusTopStart">@dimen/box_corner</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/box_corner</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/box_corner</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/box_corner</item>
     </style>
 
 </resources>
