@@ -25,94 +25,107 @@ class RegisterActivity : AppCompatActivity() {
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.registerName.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                val name = s.toString().trim()
-
-                if (name.isEmpty()) {
-                    binding.nameLayout.error = getString(R.string.invalid_name)
-                } else if (!isValidName(name)) {
-                    binding.nameLayout.error = getString(R.string.invalid_nameNumber)
-                } else {
-                    binding.nameLayout.error = null
+        binding.apply {
+            registerName.addTextChangedListener(object : TextWatcher {
+                override fun afterTextChanged(s: Editable?) {
                 }
-            }
-        })
 
-        binding.registerPhone.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
+                override fun beforeTextChanged(
+                    s: CharSequence?, start: Int, count: Int, after: Int
+                ) {
+                }
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            }
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    val name = s.toString().trim()
 
-            override fun afterTextChanged(s: Editable?) {
-                val phone = s.toString().trim()
-
-                if (phone.isNotEmpty()) {
-                    if (!isValidPhone(phone)) {
-                        binding.phoneLayout.error = getString(R.string.invalid_phone)
-                        binding.phoneLayout.errorIconDrawable = null
+                    if (name.isEmpty()) {
+                        nameLayout.error = getString(R.string.invalid_name)
+                    } else if (!isValidName(name)) {
+                        nameLayout.error = getString(R.string.invalid_nameNumber)
                     } else {
-                        binding.phoneLayout.error = null
+                        nameLayout.error = null
                     }
-                } else {
-                    binding.phoneLayout.error = null
                 }
-            }
-        })
+            })
+        }
+        binding.apply {
+            registerPhone.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?, start: Int, count: Int, after: Int
+                ) {
+                }
 
-        binding.registerEmail.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                }
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            }
+                override fun afterTextChanged(s: Editable?) {
+                    val phone = s.toString().trim()
 
-            override fun afterTextChanged(s: Editable?) {
-                val email = s.toString().trim()
-
-                if (email.isNotEmpty()) {
-                    if (!isValidEmail(email)) {
-                        binding.emailLayout.error = getString(R.string.invalid_email)
-                        binding.emailLayout.errorIconDrawable = null
+                    if (phone.isNotEmpty()) {
+                        if (!isValidPhone(phone)) {
+                            phoneLayout.error = getString(R.string.invalid_phone)
+                            phoneLayout.errorIconDrawable = null
+                        } else {
+                            phoneLayout.error = null
+                        }
                     } else {
-                        binding.emailLayout.error = null
+                        phoneLayout.error = null
                     }
-                } else {
-                    binding.emailLayout.error = null
                 }
-            }
-        })
+            })
+        }
+        binding.apply {
+            registerEmail.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?, start: Int, count: Int, after: Int
+                ) {
+                }
 
-        binding.registerPassword.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-            }
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                }
 
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
+                override fun afterTextChanged(s: Editable?) {
+                    val email = s.toString().trim()
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                val password = s.toString().trim()
-
-                if (password.isNotEmpty()) {
-                    if (password.length < 6 || !isValidPassword(password)) {
-                        binding.passLayout.error = getString(R.string.invalid_password)
-                        binding.passLayout.errorIconDrawable = null
+                    if (email.isNotEmpty()) {
+                        if (!isValidEmail(email)) {
+                            emailLayout.error = getString(R.string.invalid_email)
+                            emailLayout.errorIconDrawable = null
+                        } else {
+                            emailLayout.error = null
+                        }
                     } else {
-                        binding.passLayout.error = null
+                        emailLayout.error = null
                     }
-                } else {
-                    binding.passLayout.error = null
                 }
-            }
-        })
+            })
+        }
+        binding.apply {
+            registerPassword.addTextChangedListener(object : TextWatcher {
+                override fun afterTextChanged(s: Editable?) {
+                }
+
+                override fun beforeTextChanged(
+                    s: CharSequence?, start: Int, count: Int, after: Int
+                ) {
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    val password = s.toString().trim()
+
+                    if (password.isNotEmpty()) {
+                        if (password.length < 6 || !isValidPassword(password)) {
+                            passLayout.error = getString(R.string.invalid_password)
+                            passLayout.errorIconDrawable = null
+                        } else {
+                            passLayout.error = null
+                        }
+                    } else {
+                        passLayout.error = null
+                    }
+                }
+            })
+        }
 
         binding.backButton.setOnClickListener {
             finish()
@@ -121,72 +134,68 @@ class RegisterActivity : AppCompatActivity() {
             finish()
         }
 
-        binding.registerButton.setOnClickListener {
-            val name = binding.registerName.text.toString()
-            val phone = binding.registerPhone.text.toString()
-            val email = binding.registerEmail.text.toString()
-            val password = binding.registerPassword.text.toString()
+        binding.apply {
+            registerButton.setOnClickListener {
+                val name = registerName.text.toString()
+                val phone = registerPhone.text.toString()
+                val email = registerEmail.text.toString()
+                val password = registerPassword.text.toString()
 
-            if (name.isNotEmpty() && isValidPhone(phone) && isValidEmail(email) && password.length >= 6) {
-                register(name, email, password, phone)
-            } else {
-                if (!isValidName(name)) {
-                    binding.nameLayout.error = getString(R.string.invalid_name)
-                }
-                if (!isValidPhone(phone)) {
-                    binding.phoneLayout.error = getString(R.string.invalid_phone)
-                }
-                if (!isValidEmail(email)) {
-                    binding.emailLayout.error = getString(R.string.invalid_email)
-                }
-                if (password.length < 6) {
-                    binding.passLayout.error = getString(R.string.invalid_password)
+                if (name.isNotEmpty() && isValidPhone(phone) && isValidEmail(email) && password.length >= 6) {
+                    register(name, email, password, phone)
+                } else {
+                    if (!isValidName(name) || name.isEmpty()) {
+                        nameLayout.error = getString(R.string.invalid_name)
+                    }
+                    if (!isValidPhone(phone)) {
+                        phoneLayout.error = getString(R.string.invalid_phone)
+                    }
+                    if (!isValidEmail(email)) {
+                        emailLayout.error = getString(R.string.invalid_email)
+                    }
+                    if (password.length < 6) {
+                        passLayout.error = getString(R.string.invalid_password)
+                    }
                 }
             }
         }
     }
 
     private fun register(name: String, email: String, password: String, phone: String) {
-        binding.progressBar.visibility = View.VISIBLE
+        progressBar(true)
+
         val request = RegisterRequest(name, email, password, phone)
         val call = ApiConfig().getApi().registerUser(request)
 
         call.enqueue(object : Callback<RegisterResponse> {
             override fun onResponse(
-                call: Call<RegisterResponse>,
-                response: Response<RegisterResponse>
+                call: Call<RegisterResponse>, response: Response<RegisterResponse>
             ) {
                 if (response.isSuccessful) {
                     Toast.makeText(
-                        this@RegisterActivity, getString(R.string.accCreated),
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()
+                        this@RegisterActivity, getString(R.string.accCreated), Toast.LENGTH_SHORT
+                    ).show()
+
                     val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
                     startActivity(intent)
                     finish()
-
-                    binding.progressBar.visibility = View.GONE
+                    progressBar(false)
 
                 } else {
                     val errorResponse = response.errorBody()?.string()
                     val error = Gson().fromJson(errorResponse, ErrorRegister::class.java)
                     val errorMessage = error.details.getErrorMessage()
                     Toast.makeText(this@RegisterActivity, errorMessage, Toast.LENGTH_SHORT).show()
-
-                    binding.progressBar.visibility = View.GONE
+                    progressBar(false)
                 }
             }
 
             override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
                 Toast.makeText(
-                    this@RegisterActivity,
-                    getString(R.string.failServer),
-                    Toast.LENGTH_SHORT
+                    this@RegisterActivity, getString(R.string.failServer), Toast.LENGTH_SHORT
                 ).show()
-
-                binding.progressBar.visibility = View.GONE
+                progressBar(false)
             }
         })
     }
@@ -203,6 +212,14 @@ class RegisterActivity : AppCompatActivity() {
         errorMessages.clear()
 
         return errorMessage
+    }
+
+    private fun progressBar(visible: Boolean) {
+        if (visible) {
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.progressBar.visibility = View.GONE
+        }
     }
 
     private fun isValidName(name: String): Boolean {
