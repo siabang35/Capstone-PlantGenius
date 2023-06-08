@@ -33,65 +33,75 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
         getThemeApp()
 
-        binding.loginPhoneEmail.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-            }
+        binding.apply {
+            loginPhoneEmail.addTextChangedListener(object : TextWatcher {
+                override fun afterTextChanged(s: Editable?) {
+                }
 
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
+                override fun beforeTextChanged(
+                    s: CharSequence?, start: Int, count: Int, after: Int
+                ) {
+                }
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                val input = s.toString().trim()
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    val input = s.toString().trim()
 
-                if (input.isNotEmpty()) {
-                    if (isValidEmail(input)) {
-                        binding.phoneEmailLayout.error = null
-                    } else if (isValidPhone(input)) {
-                        binding.phoneEmailLayout.error = null
+                    if (input.isNotEmpty()) {
+                        if (isValidEmail(input)) {
+                            phoneEmailLayout.error = null
+                        } else if (isValidPhone(input)) {
+                            phoneEmailLayout.error = null
+                        } else {
+                            phoneEmailLayout.error = getString(R.string.invalid_phone_email)
+                        }
                     } else {
-                        binding.phoneEmailLayout.error = getString(R.string.invalid_phone_email)
+                        phoneEmailLayout.error = null
                     }
-                } else {
-                    binding.phoneEmailLayout.error = null
                 }
-            }
-        })
+            })
+        }
 
-        binding.loginPassword.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-            }
+        binding.apply {
+            loginPassword.addTextChangedListener(object : TextWatcher {
+                override fun afterTextChanged(s: Editable?) {
+                }
 
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
+                override fun beforeTextChanged(
+                    s: CharSequence?, start: Int, count: Int, after: Int
+                ) {
+                }
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                val password = s.toString().trim()
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    val password = s.toString().trim()
 
-                if (password.isNotEmpty()) {
-                    if (password.length < 6 || !isValidPassword(password)) {
-                        binding.passLayout.error = getString(R.string.invalid_password)
-                        binding.passLayout.errorIconDrawable = null
+                    if (password.isNotEmpty()) {
+                        if (password.length < 6 || !isValidPassword(password)) {
+                            passLayout.error = getString(R.string.invalid_password)
+                            passLayout.errorIconDrawable = null
+                        } else {
+                            passLayout.error = null
+                        }
                     } else {
-                        binding.passLayout.error = null
+                        passLayout.error = null
                     }
+                }
+            })
+        }
+
+        binding.apply {
+            loginButton.setOnClickListener {
+                val phoneEmail = loginPhoneEmail.text.toString()
+                val password = loginPassword.text.toString()
+
+                if (isValidEmail(phoneEmail) && password.length >= 6) {
+                    login(phoneEmail, password)
                 } else {
-                    binding.passLayout.error = null
-                }
-            }
-        })
-
-        binding.loginButton.setOnClickListener {
-            val phoneEmail = binding.loginPhoneEmail.text.toString()
-            val password = binding.loginPassword.text.toString()
-
-            if (isValidEmail(phoneEmail) && password.length >= 6) {
-                login(phoneEmail, password)
-            } else {
-                if (!isValidEmail(phoneEmail)) {
-                    binding.phoneEmailLayout.error = getString(R.string.invalid_phone_email)
-                }
-                if (password.length < 6) {
-                    binding.passLayout.error = getString(R.string.invalid_password)
+                    if (!isValidEmail(phoneEmail)) {
+                        phoneEmailLayout.error = getString(R.string.invalid_phone_email)
+                    }
+                    if (password.length < 6) {
+                        passLayout.error = getString(R.string.invalid_password)
+                    }
                 }
             }
         }
@@ -113,12 +123,15 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun login(email: String, password: String) {
-        binding.progressBar.visibility = View.VISIBLE
+        progressBar(true)
+
         val request = LoginRequest(email, password)
         val call = ApiConfig().getApi().loginUser(request)
 
         call.enqueue(object : Callback<LoginResponse> {
-            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+            override fun onResponse(
+                call: Call<LoginResponse>, response: Response<LoginResponse>
+            ) {
                 if (response.isSuccessful) {
                     val token = response.body()?.toString()
 
@@ -133,8 +146,7 @@ class LoginActivity : AppCompatActivity() {
                         val intent = Intent(this@LoginActivity, MainActivity::class.java)
                         startActivity(intent)
                         finish()
-
-                        binding.progressBar.visibility = View.GONE
+                        progressBar(false)
                     }
 
                 } else {
@@ -142,18 +154,15 @@ class LoginActivity : AppCompatActivity() {
                     val error = Gson().fromJson(errorResponse, LoginErrorResponse::class.java)
                     val errorMessage = error?.message
                     Toast.makeText(this@LoginActivity, errorMessage, Toast.LENGTH_SHORT).show()
-
-                    binding.progressBar.visibility = View.GONE
+                    progressBar(false)
                 }
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                 Toast.makeText(
-                    this@LoginActivity,
-                    getString(R.string.failServer),
-                    Toast.LENGTH_SHORT
+                    this@LoginActivity, getString(R.string.failServer), Toast.LENGTH_SHORT
                 ).show()
-                binding.progressBar.visibility = View.GONE
+                progressBar(false)
             }
         })
     }
@@ -176,6 +185,14 @@ class LoginActivity : AppCompatActivity() {
         with(sharedPref.edit()) {
             putBoolean("theme", theme)
             apply()
+        }
+    }
+
+    private fun progressBar(visible: Boolean) {
+        if (visible) {
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.progressBar.visibility = View.GONE
         }
     }
 
