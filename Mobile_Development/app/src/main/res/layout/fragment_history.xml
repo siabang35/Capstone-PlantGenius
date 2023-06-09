@@ -53,15 +53,9 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/SubsButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/MaterialButtonStyle"
                 android:backgroundTint="?attr/colorPrimary"
-                android:elevation="5dp"
-                android:padding="10dp"
                 android:text="LANGGANAN SEKARANG!"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:cornerRadius="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView10" />
@@ -72,18 +66,16 @@
                 app:layout_constraintTop_toBottomOf="@+id/SubsButton"
                 tools:layout_editor_absoluteX="20dp" />
 
-            <ProgressBar
-                android:id="@+id/progressBar"
-                style="?android:attr/progressBarStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:visibility="visible" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="@style/ProgressBar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

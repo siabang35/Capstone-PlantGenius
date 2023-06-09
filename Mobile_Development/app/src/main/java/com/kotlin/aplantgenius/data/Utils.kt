@@ -49,7 +49,9 @@ fun rotateFile(file: File, isBackCamera: Boolean = false) {
         matrix.postScale(-1f, 1f, bitmap.width / 2f, bitmap.height / 2f)
     }
     val result = Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
-    result.compress(Bitmap.CompressFormat.JPEG, 100, FileOutputStream(file))
+    val outputStream = FileOutputStream(file)
+    result.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+    outputStream.close()
 }
 
 fun uriToFile(selectedImg: Uri, context: Context): File {

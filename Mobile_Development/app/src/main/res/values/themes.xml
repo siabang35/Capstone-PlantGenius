@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Theme.APlantGenius" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
@@ -12,14 +12,16 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/turquoiseGreen</item>
         <!-- Customize your theme here. -->
-        <item name="android:colorBackground">@color/coconut</item>
+        <item name="android:colorBackground">@color/white</item>
         <item name="android:textColor">@color/darkGray700</item>
         <item name="colorOnTertiary">@color/black</item>
         <item name="colorAccent">@color/coconut</item>
         <item name="colorTertiary">@color/darkGreen700</item>
     </style>
 
-    <style name="TextInputLayoutAppearance" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+    <style name="TextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="boxBackgroundColor">@color/white</item>
         <item name="boxStrokeColor">@color/darkGreen</item>
         <item name="hintTextColor">@color/darkGreen700</item>
@@ -30,6 +32,37 @@
         <item name="boxCornerRadiusTopEnd">@dimen/box_corner</item>
         <item name="boxCornerRadiusBottomStart">@dimen/box_corner</item>
         <item name="boxCornerRadiusBottomEnd">@dimen/box_corner</item>
+    </style>
+
+    <style name="MaterialButtonStyle" parent="Widget.MaterialComponents.Button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:backgroundTint">@color/darkGreen700</item>
+        <item name="android:padding">13dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">18sp</item>
+        <item name="cornerRadius">15dp</item>
+        <item name="elevation">5dp</item>
+    </style>
+
+    <style name="SmallButtonStyle" parent="Widget.MaterialComponents.Button">
+        <item name="android:layout_width">120dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:backgroundTint">@color/turquoiseGreen</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">10dp</item>
+        <item name="cornerRadius">10dp</item>
+        <item name="elevation">5dp</item>
+    </style>
+
+
+    <style name="ProgressBar" parent="Widget.AppCompat.ProgressBar">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:visibility">gone</item>
+        <item name="android:elevation">5dp</item>
+        <item name="android:indeterminate">true</item>
+        <item name="android:indeterminateTint">@color/darkGreen700</item>
     </style>
 
 </resources>
