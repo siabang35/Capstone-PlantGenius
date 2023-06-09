@@ -9,7 +9,9 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:elevation="1dp"
         android:fillViewport="true">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -18,12 +20,12 @@
 
             <ImageView
                 android:id="@+id/backButton"
-                android:contentDescription="Tombol kembali"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:contentDescription="Tombol kembali"
                 android:src="@drawable/ic_back"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/backText"
@@ -67,9 +69,7 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/nameLayout"
-                    style="@style/TextInputLayoutAppearance"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/TextInputLayoutStyle"
                     android:layout_marginTop="5dp"
                     app:startIconDrawable="@drawable/ic_baseline_person_24">
 
@@ -85,9 +85,7 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/phoneLayout"
-                    style="@style/TextInputLayoutAppearance"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/TextInputLayoutStyle"
                     android:layout_marginTop="5dp"
                     app:startIconDrawable="@drawable/ic_baseline_phone_24">
 
@@ -103,9 +101,7 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/emailLayout"
-                    style="@style/TextInputLayoutAppearance"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/TextInputLayoutStyle"
                     android:layout_marginTop="5dp"
                     app:startIconDrawable="@drawable/ic_baseline_email_24">
 
@@ -121,9 +117,7 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/passLayout"
-                    style="@style/TextInputLayoutAppearance"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/TextInputLayoutStyle"
                     android:layout_marginTop="5dp"
                     app:passwordToggleEnabled="true"
                     app:startIconDrawable="@drawable/ic_baseline_lock_24">
@@ -142,40 +136,30 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/registerButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/MaterialButtonStyle"
                 android:layout_marginTop="16dp"
-                android:backgroundTint="@color/darkGreen700"
-                android:elevation="10dp"
-                android:padding="13dp"
                 android:text="@string/signup"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:cornerRadius="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/input" />
-
-            <ProgressBar
-                android:id="@+id/progressBar"
-                style="?android:attr/progressBarStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:indeterminateTint="?attr/colorTertiary"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:visibility="visible" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="@style/ProgressBar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:src="@drawable/image_background"
+        android:elevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

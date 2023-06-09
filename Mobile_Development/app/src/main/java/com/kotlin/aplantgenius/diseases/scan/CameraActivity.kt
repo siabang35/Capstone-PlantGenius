@@ -3,6 +3,7 @@ package com.kotlin.aplantgenius.diseases.scan
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
@@ -39,7 +40,9 @@ class CameraActivity : AppCompatActivity() {
     }
 
     private fun takePhoto() {
-        val imageCapture = imageCapture ?: return
+        binding.progressBar.visibility = View.VISIBLE
+
+        val imageCapture = this.imageCapture ?: return
         val photoFile = createFile(application)
         val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
 
@@ -67,6 +70,7 @@ class CameraActivity : AppCompatActivity() {
                 }
             }
         )
+        binding.progressBar.visibility = View.GONE
     }
 
     private fun startCamera() {

@@ -139,16 +139,10 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_check"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
+            style="@style/SmallButtonStyle"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            android:backgroundTint="?attr/colorPrimary"
-            android:elevation="5dp"
-            android:padding="10dp"
-            android:text="Cek lagi"
-            android:textSize="18sp"
-            app:cornerRadius="10dp" />
+            android:text="Cek lagi" />
 
         <ImageButton
             android:id="@+id/btn_home"
