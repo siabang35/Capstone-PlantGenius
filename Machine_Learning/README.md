@@ -38,4 +38,6 @@ We utilized the `EfficientNetB3` pre-trained model to extract some feautures as 
 After had the model, we use the model to predict some images. Please refer to this [notebook](https://github.com/siabang35/Capstone-PlantGenius/blob/master/Machine_Learning/predict_Images.ipynb) to view the complete steps to predict images and also the result.
 
 ## References
-
+* Tiwari V, Joshi R, Dutta M. (2021). Dense convolutional neural networks based multiclass plant disease detection and classification using leaf images. *Ecological informatics, 63*, 2021.
+* Sankar A. (2020). Disease Detection in Spinach Leaves using Image Processing and Machine Learning. *International Journal of Innovative Research in Electrical, 8*, 2020.
+* kaggle.com. (2018). Kue Indonesia. Access on May 12th, 2023, from this [link]([(https://www.kaggle.com/datasets/vipoooool/new-plant-diseases-dataset)]).
