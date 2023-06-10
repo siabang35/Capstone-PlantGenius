@@ -70,7 +70,7 @@
                         android:id="@+id/started"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:backgroundTint="@color/darkRed"
+                        android:backgroundTint="?attr/colorOnContainer"
                         android:elevation="10dp"
                         android:padding="15dp"
                         android:text="Scan now!"

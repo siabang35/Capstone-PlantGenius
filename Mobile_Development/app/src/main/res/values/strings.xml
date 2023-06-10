@@ -1,21 +1,25 @@
 <resources>
 
     <string name="app_name">PlantGenius</string>
+
     <string name="errorPhoto">Gagal mengambil gambar</string>
     <string name="errorCamera">Tidak dapat membuka kamera</string>
     <string name="takePicture">Ambil gambar</string>
     <string name="camera">Kamera</string>
+
     <string name="gallery">Galeri</string>
     <string name="checkDiseases">Cek Penyakit</string>
     <string name="textDiseases">Choose your plant picture!</string>
     <string name="getPermission">Permission didapatkan</string>
     <string name="noPermission">Tidak mendapatkan Permission</string>
+
     <string name="email">Email</string>
     <string name="login">Login</string>
     <string name="inputPassword">Password</string>
     <string name="password">Password</string>
     <string name="inputEmail">Email</string>
     <string name="name">Nama</string>
+
     <string name="createAccount">Create Account</string>
     <string name="inputName">Nama</string>
     <string name="signup">Sign Up</string>

@@ -28,6 +28,7 @@ fun createCustomTempFile(context: Context): File {
     return File.createTempFile(timeStamp, ".jpg", storageDir)
 }
 
+
 fun createFile(application: Application): File {
     val mediaDir = application.externalMediaDirs.firstOrNull()?.let {
         File(it, application.resources.getString(R.string.app_name)).apply { mkdirs() }

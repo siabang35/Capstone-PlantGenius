@@ -144,15 +144,16 @@
             android:layout_marginBottom="16dp"
             android:text="Cek lagi" />
 
-        <ImageButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_home"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_marginTop="5dp"
-            android:elevation="3dp"
-            android:background="@drawable/rounded_button_bg"
-            android:src="@drawable/ic_home_24"
-            app:tint="@color/white" />
+            android:layout_width="50dp"
+            android:layout_height="60dp"
+            android:backgroundTint="@color/darkRed"
+            app:icon="@drawable/ic_home_24"
+            android:layout_marginEnd="16dp"
+            app:cornerRadius="70dp"
+            android:padding="13dp"
+            android:layout_marginBottom="16dp"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

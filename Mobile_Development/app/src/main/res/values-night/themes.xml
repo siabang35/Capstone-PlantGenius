@@ -14,9 +14,9 @@
         <!-- Customize your theme here. -->
         <item name="android:colorBackground">@color/darkGray</item>
         <item name="android:textColor">@color/aqua</item>
-        <item name="colorOnTertiary">@color/coconut</item>
-        <item name="colorAccent">@color/darkGray</item>
-        <item name="colorTertiary">@color/turquoiseGreen</item>
+        <item name="colorOnTertiary">@color/aqua</item>
+        <item name="colorTertiary">@color/gray</item>
+        <item name="colorOnContainer">@color/gold</item>
     </style>
 
     <style name="TextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -25,7 +25,7 @@
         <item name="boxBackgroundColor">@color/darkGreen700</item>
         <item name="boxStrokeColor">@color/turquoiseGreen</item>
         <item name="hintTextColor">@color/turquoiseGreen</item>
-        <item name="errorTextColor">@color/darkRed</item>
+        <item name="errorTextColor">@color/gold</item>
         <item name="boxStrokeWidth">2dp</item>
         <item name="errorEnabled">true</item>
         <item name="boxCornerRadiusTopStart">@dimen/box_corner</item>

@@ -131,7 +131,7 @@
                 android:clickable="true"
                 android:onClick="signUpClicked"
                 android:text="SIGN UP"
-                android:textColor="@color/darkRed"
+                android:textColor="?attr/colorOnContainer"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

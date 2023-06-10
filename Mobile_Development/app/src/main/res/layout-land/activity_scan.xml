@@ -32,17 +32,6 @@
             android:textStyle="bold" />
     </com.google.android.material.appbar.MaterialToolbar>
 
-    <View
-        android:id="@+id/line"
-        android:layout_width="2dp"
-        android:layout_height="match_parent"
-        android:layout_marginStart="80dp"
-        android:background="@color/turquoiseGreen"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarScan" />
-
     <ProgressBar
         android:id="@+id/progressBar"
         style="@style/ProgressBar"
@@ -52,32 +41,38 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible" />
 
+    <View
+        android:id="@+id/line"
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="80dp"
+        android:background="@color/turquoiseGreen"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarScan" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:padding="16dp"
         android:focusableInTouchMode="true"
+        android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/line"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbarScan">
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+        <ImageView
+            android:id="@+id/previewImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/previewImageView"
-                android:layout_width="300dp"
-                android:layout_gravity="center"
-                android:layout_height="400dp"
-                app:srcCompat="@drawable/image_scan" />
-        </ScrollView>
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/image_scan" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
