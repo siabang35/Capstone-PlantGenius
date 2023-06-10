@@ -1,28 +1,23 @@
 package com.kotlin.aplantgenius.diseases.scan
 
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.view.WindowInsets
-import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.camera.core.CameraSelector
-import androidx.camera.core.ImageCapture
-import androidx.camera.core.ImageCaptureException
-import androidx.camera.core.Preview
+import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import com.kotlin.aplantgenius.R
 import com.kotlin.aplantgenius.data.createFile
 import com.kotlin.aplantgenius.databinding.ActivityCameraBinding
 
-class CameraActivity : AppCompatActivity() {
+class CameraXActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityCameraBinding
     private var imageCapture: ImageCapture? = null
     private var cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
-    private lateinit var binding: ActivityCameraBinding
+    private var camera: Camera? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +30,6 @@ class CameraActivity : AppCompatActivity() {
 
     public override fun onResume() {
         super.onResume()
-        hideSystemUI()
         startCamera()
     }
 
@@ -52,10 +46,11 @@ class CameraActivity : AppCompatActivity() {
             object : ImageCapture.OnImageSavedCallback {
                 override fun onError(exc: ImageCaptureException) {
                     Toast.makeText(
-                        this@CameraActivity,
+                        this@CameraXActivity,
                         getString(R.string.errorPhoto),
                         Toast.LENGTH_SHORT
                     ).show()
+                    binding.progressBar.visibility = View.GONE
                 }
 
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
@@ -67,10 +62,10 @@ class CameraActivity : AppCompatActivity() {
                     )
                     setResult(ScanActivity.CAMERA_X_RESULT, intent)
                     finish()
+                    binding.progressBar.visibility = View.GONE
                 }
             }
         )
-        binding.progressBar.visibility = View.GONE
     }
 
     private fun startCamera() {
@@ -92,10 +87,13 @@ class CameraActivity : AppCompatActivity() {
                     cameraSelector,
                     preview,
                     imageCapture
-                )
+                ).apply {
+                    camera = this
+                    cameraControl.enableFocus()
+                }
             } catch (exc: Exception) {
                 Toast.makeText(
-                    this@CameraActivity,
+                    this@CameraXActivity,
                     getString(R.string.errorCamera),
                     Toast.LENGTH_SHORT
                 ).show()
@@ -103,16 +101,14 @@ class CameraActivity : AppCompatActivity() {
         }, ContextCompat.getMainExecutor(this))
     }
 
-    private fun hideSystemUI() {
-        @Suppress("DEPRECATION")
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            window.insetsController?.hide(WindowInsets.Type.statusBars())
-        } else {
-            window.setFlags(
-                WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN
-            )
-        }
-        supportActionBar?.hide()
+    private fun CameraControl.enableFocus() {
+        val factory = binding.viewFinder.meteringPointFactory
+        val centerX = binding.focusBox.left + binding.focusBox.width / 2f
+        val centerY = binding.focusBox.top + binding.focusBox.height / 2f
+        val meteringPoint = factory.createPoint(centerX, centerY)
+        val action = FocusMeteringAction.Builder(meteringPoint).build()
+
+        startFocusAndMetering(action)
     }
 }
+

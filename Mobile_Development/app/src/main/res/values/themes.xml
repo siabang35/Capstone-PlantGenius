@@ -14,9 +14,10 @@
         <!-- Customize your theme here. -->
         <item name="android:colorBackground">@color/white</item>
         <item name="android:textColor">@color/darkGray700</item>
-        <item name="colorOnTertiary">@color/black</item>
-        <item name="colorAccent">@color/coconut</item>
-        <item name="colorTertiary">@color/darkGreen700</item>
+        <item name="colorOnTertiary">@color/darkGreen700</item>
+        <item name="colorTertiary">@color/turquoiseGreen</item>
+        <item name="colorOnContainer">@color/darkRed</item>
+
     </style>
 
     <style name="TextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -54,7 +55,6 @@
         <item name="cornerRadius">10dp</item>
         <item name="elevation">5dp</item>
     </style>
-
 
     <style name="ProgressBar" parent="Widget.AppCompat.ProgressBar">
         <item name="android:layout_width">wrap_content</item>
