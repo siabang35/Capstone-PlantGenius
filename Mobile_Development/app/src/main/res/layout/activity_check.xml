@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:text="Plant Genius"
+            android:text="@string/plant_genius"
             android:textSize="20sp"
             android:textStyle="bold" />
     </com.google.android.material.appbar.MaterialToolbar>
@@ -64,7 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="HASIL DETEKSI"
+                android:text="@string/result_detect"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -77,7 +77,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="24dp"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut orci auctor, ultrices sapien eu, laoreet metus. Etiam auctor tellus ut quam lacinia, ac congue massa scelerisque. Sed quis diam id nisi venenatis commodo. Proin vel lacus id augue hendrerit lobortis. Nunc quis mauris vel turpis consectetur luctus. Nullam feugiat euismod enim, vel molestie ipsum bibendum."
+                android:text="@string/description"
                 android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

@@ -87,3 +87,13 @@ data class ErrorMessage(
     @SerializedName("message")
     val message: String
 )
+
+data class ImageRequest(
+    val imageBase64: String
+)
+
+data class ImageResponse(
+    val message: String,
+    val error: Boolean
+)
+

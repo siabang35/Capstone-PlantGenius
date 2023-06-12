@@ -17,9 +17,9 @@
 
     <ImageView
         android:id="@+id/focusBox"
-        android:layout_width="400dp"
+        android:layout_width="300dp"
         android:layout_height="300dp"
-        android:background="@drawable/scan2"
+        android:background="@drawable/scan"
         app:layout_constraintBottom_toBottomOf="@id/viewFinder"
         app:layout_constraintEnd_toEndOf="@id/viewFinder"
         app:layout_constraintStart_toStartOf="@id/viewFinder"

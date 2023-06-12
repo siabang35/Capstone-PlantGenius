@@ -49,10 +49,9 @@
             android:textSize="12sp"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toStartOf="@+id/delete"
-            card_view:layout_constraintHorizontal_bias="0.683"
             card_view:layout_constraintStart_toEndOf="@+id/ivPhoto"
             card_view:layout_constraintTop_toTopOf="parent"
-            tools:text="Akurasi 99%" />
+            tools:text="@string/description" />
 
         <ImageView
             android:id="@+id/delete"

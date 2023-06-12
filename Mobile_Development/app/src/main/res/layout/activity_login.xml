@@ -45,7 +45,7 @@
                 android:id="@+id/tvLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Login"
+                android:text="@string/login"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/textView8"
@@ -55,7 +55,7 @@
                 android:id="@+id/textView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Please Sign In to Continue"
+                android:text="@string/login_desc"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toTopOf="@+id/loginInput"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -81,7 +81,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
-                        android:hint="@string/inputPhoneEmail"
+                        android:hint="@string/email"
                         android:inputType="textEmailAddress"
                         tools:ignore="SpeakableTextPresentCheck" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -98,7 +98,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
-                        android:hint="@string/inputPassword"
+                        android:hint="@string/password"
                         android:inputType="textPassword"
                         app:passwordToggleEnabled="true"
                         tools:ignore="SpeakableTextPresentCheck" />
@@ -119,7 +119,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="Don't have an account? "
+                android:text="@string/no_have_acc"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/loginButton" />
@@ -130,7 +130,7 @@
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 android:onClick="signUpClicked"
-                android:text="SIGN UP"
+                android:text="@string/create_acc"
                 android:textColor="?attr/colorOnContainer"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"

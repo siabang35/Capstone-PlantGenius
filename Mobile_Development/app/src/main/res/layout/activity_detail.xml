@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:text="Plant Genius"
+            android:text="@string/plant_genius"
             android:textSize="20sp"
             android:textStyle="bold" />
     </com.google.android.material.appbar.MaterialToolbar>
@@ -75,10 +75,10 @@
                 android:padding="30dp">
 
                 <TextView
-                    android:id="@+id/textView2"
+                    android:id="@+id/diseaseName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="DISEASE NAME"
+                    android:text="@string/disease_name"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -89,18 +89,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="Description Disease"
+                    android:text="@string/description_disease"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView2" />
+                    app:layout_constraintTop_toBottomOf="@+id/diseaseName" />
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/diseaseDesc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut orci auctor, ultrices sapien eu, laoreet metus. Etiam auctor tellus ut quam lacinia, ac congue massa scelerisque. Sed quis diam id nisi venenatis commodo. Proin vel lacus id augue hendrerit lobortis. Nunc quis mauris vel turpis consectetur luctus. Nullam feugiat euismod enim, vel molestie ipsum bibendum."
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="@string/description"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -109,18 +108,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="Treatment Disease"
+                    android:text="@string/treatment_disease"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView4" />
+                    app:layout_constraintTop_toBottomOf="@+id/diseaseDesc" />
 
                 <TextView
-                    android:id="@+id/textView6"
+                    android:id="@+id/treatment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut orci auctor, ultrices sapien eu, laoreet metus. Etiam auctor tellus ut quam lacinia, ac congue massa scelerisque. Sed quis diam id nisi venenatis commodo. Proin vel lacus id augue hendrerit lobortis. Nunc quis mauris vel turpis consectetur luctus. Nullam feugiat euismod enim, vel molestie ipsum bibendum."
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="@string/description"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
@@ -142,7 +140,7 @@
             style="@style/SmallButtonStyle"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            android:text="Cek lagi" />
+            android:text="@string/check_again" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_home"
