@@ -30,12 +30,7 @@ class HistoryFragment : Fragment() {
         val drawable = R.drawable.photo_history
 
         val historyItems = listOf(
-            ListHistory(
-                "Item 1",
-                drawable,
-                "cndcjzcjbzjbzbchzb cbuzdbuzbcubc cbz cbzbckuzbc zcb zbc z bcukzb cuz ckz bkz ckuzb ckuzbckuz cz kcb zuczk ",
-                "1"
-            ),
+            ListHistory("Item 1", drawable, "Description 1", "1"),
             ListHistory("Item 2", drawable, "Description 2", "2"),
             ListHistory("Item 3", drawable, "Description 3", "3"),
             ListHistory("Item 4", drawable, "Description 4", "4"),
@@ -54,7 +49,7 @@ class HistoryFragment : Fragment() {
         binding.rvHistory.addItemDecoration(itemDecoration)
 
         binding.SubsButton.setOnClickListener {
-            Toast.makeText(requireContext(), "Fitur Ini Akan Segera Hadir", Toast.LENGTH_SHORT)
+            Toast.makeText(requireContext(), getString(R.string.coming_soon), Toast.LENGTH_SHORT)
                 .show()
         }
     }

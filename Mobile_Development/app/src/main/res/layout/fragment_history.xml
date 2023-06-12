@@ -21,7 +21,7 @@
                 android:id="@+id/textView7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="5 RIWAYAT DETEKSI ANDA"
+                android:text="@string/five_history"
                 android:textColor="@color/turquoiseGreen"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="510dp"
                 android:gravity="center"
-                android:text="Jika Anda ingin mendeteksi tanaman yang lebih banyak silahkan BERLANGGANAN sekarang juga dan dapatkan semua FITUR dari Aplikasi kami!"
+                android:text="@string/subscribe_desc"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView7" />
@@ -55,7 +55,7 @@
                 android:id="@+id/SubsButton"
                 style="@style/MaterialButtonStyle"
                 android:backgroundTint="?attr/colorPrimary"
-                android:text="LANGGANAN SEKARANG!"
+                android:text="@string/subscribe"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView10" />

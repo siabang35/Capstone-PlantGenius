@@ -1,6 +1,7 @@
 package com.kotlin.aplantgenius.diseases.scan
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
@@ -13,10 +14,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.kotlin.aplantgenius.R
+import com.kotlin.aplantgenius.data.*
 import com.kotlin.aplantgenius.databinding.ActivityScanBinding
-import com.kotlin.aplantgenius.data.rotateFile
-import com.kotlin.aplantgenius.data.uriToFile
 import com.kotlin.aplantgenius.diseases.check.CheckActivity
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import retrofit2.Call
+import retrofit2.Callback
 import java.io.File
 
 class ScanActivity : AppCompatActivity() {
@@ -46,11 +52,46 @@ class ScanActivity : AppCompatActivity() {
         binding.galleryButton.setOnClickListener { startGallery() }
 
         binding.btnToCheck.setOnClickListener {
-            val intent = Intent(this, CheckActivity::class.java)
-            startActivity(intent)
+            val sharedPref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+            val myToken = sharedPref.getString("token", null)
+
+            CoroutineScope(Dispatchers.Main).launch {
+                uploadImage(myToken, getFile!!)
+
+                val intent = Intent(this@ScanActivity, CheckActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
 
+    private suspend fun uploadImage(token: String?, file: File) {
+        withContext(Dispatchers.IO) {
+            val fileCompress = compress(file)
+            val base64 = base64(fileCompress)
+            val call = ApiConfig().getApi().scanImage("Bearer $token", imageBase64 = base64)
+            call.enqueue(object : Callback<ImageResponse> {
+                override fun onResponse(
+                    call: Call<ImageResponse>,
+                    response: retrofit2.Response<ImageResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        val imageResponse = response.body()
+                        if (imageResponse != null && !imageResponse.error) {
+                            Toast.makeText(applicationContext, "Sukses", Toast.LENGTH_SHORT).show()
+                        } else {
+                            Toast.makeText(applicationContext, "Gagal", Toast.LENGTH_SHORT).show()
+                        }
+                    } else {
+                        Toast.makeText(applicationContext, "Kegagalan", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<ImageResponse>, t: Throwable) {
+                    Toast.makeText(applicationContext, "Kesalahan", Toast.LENGTH_SHORT).show()
+                }
+            })
+        }
+    }
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<String>,

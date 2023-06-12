@@ -52,7 +52,7 @@ class LoginActivity : AppCompatActivity() {
                         } else if (isValidPhone(input)) {
                             phoneEmailLayout.error = null
                         } else {
-                            phoneEmailLayout.error = getString(R.string.invalid_phone_email)
+                            phoneEmailLayout.error = getString(R.string.invalid_email)
                         }
                     } else {
                         phoneEmailLayout.error = null
@@ -97,7 +97,7 @@ class LoginActivity : AppCompatActivity() {
                     login(phoneEmail, password)
                 } else {
                     if (!isValidEmail(phoneEmail)) {
-                        phoneEmailLayout.error = getString(R.string.invalid_phone_email)
+                        phoneEmailLayout.error = getString(R.string.invalid_email)
                     }
                     if (password.length < 6) {
                         passLayout.error = getString(R.string.invalid_password)
@@ -136,8 +136,6 @@ class LoginActivity : AppCompatActivity() {
                     val token = response.body()?.toString()
 
                     if (token != null) {
-                        Toast.makeText(this@LoginActivity, "Login Berhasil", Toast.LENGTH_SHORT)
-                            .show()
                         val shared = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
                         with(shared.edit()) {
                             putString("token", token)
