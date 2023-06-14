@@ -61,4 +61,9 @@
     <string name="coming_soon">Fitur Ini Akan Segera Hadir</string>
     <string name="noImage">Masukan gambar terlebih dahulu</string>
 
+    <string name="home">Home</string>
+    <string name="history">History</string>
+    <string name="profile">Profile</string>
+    <string name="anError">Terjadi Kesalahan</string>
+
 </resources>

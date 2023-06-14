@@ -71,13 +71,13 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/phoneEmailLayout"
+                    android:id="@+id/emailLayout"
                     style="@style/TextInputLayoutStyle"
                     android:layout_marginTop="10dp"
                     app:startIconDrawable="@drawable/ic_baseline_email_24">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/loginPhoneEmail"
+                        android:id="@+id/loginEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"

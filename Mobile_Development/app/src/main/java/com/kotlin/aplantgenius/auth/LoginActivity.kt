@@ -8,23 +8,17 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.CompoundButton
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import com.google.gson.Gson
 import com.kotlin.aplantgenius.R
-import com.kotlin.aplantgenius.data.ApiConfig
-import com.kotlin.aplantgenius.data.LoginErrorResponse
-import com.kotlin.aplantgenius.data.LoginRequest
-import com.kotlin.aplantgenius.data.LoginResponse
 import com.kotlin.aplantgenius.databinding.ActivityLoginBinding
 import com.kotlin.aplantgenius.main.MainActivity
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
+    private val viewModel: LoginViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,83 +26,8 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
         getThemeApp()
 
-        binding.apply {
-            loginPhoneEmail.addTextChangedListener(object : TextWatcher {
-                override fun afterTextChanged(s: Editable?) {
-                }
-
-                override fun beforeTextChanged(
-                    s: CharSequence?, start: Int, count: Int, after: Int
-                ) {
-                }
-
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    val input = s.toString().trim()
-
-                    if (input.isNotEmpty()) {
-                        if (isValidEmail(input)) {
-                            phoneEmailLayout.error = null
-                        } else if (isValidPhone(input)) {
-                            phoneEmailLayout.error = null
-                        } else {
-                            phoneEmailLayout.error = getString(R.string.invalid_email)
-                        }
-                    } else {
-                        phoneEmailLayout.error = null
-                    }
-                }
-            })
-        }
-
-        binding.apply {
-            loginPassword.addTextChangedListener(object : TextWatcher {
-                override fun afterTextChanged(s: Editable?) {
-                }
-
-                override fun beforeTextChanged(
-                    s: CharSequence?, start: Int, count: Int, after: Int
-                ) {
-                }
-
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    val password = s.toString().trim()
-
-                    if (password.isNotEmpty()) {
-                        if (password.length < 6 || !isValidPassword(password)) {
-                            passLayout.error = getString(R.string.invalid_password)
-                            passLayout.errorIconDrawable = null
-                        } else {
-                            passLayout.error = null
-                        }
-                    } else {
-                        passLayout.error = null
-                    }
-                }
-            })
-        }
-
-        binding.apply {
-            loginButton.setOnClickListener {
-                val phoneEmail = loginPhoneEmail.text.toString()
-                val password = loginPassword.text.toString()
-
-                if (isValidEmail(phoneEmail) && password.length >= 6) {
-                    login(phoneEmail, password)
-                } else {
-                    if (!isValidEmail(phoneEmail)) {
-                        phoneEmailLayout.error = getString(R.string.invalid_email)
-                    }
-                    if (password.length < 6) {
-                        passLayout.error = getString(R.string.invalid_password)
-                    }
-                }
-            }
-        }
-
-        binding.signUp.setOnClickListener {
-            val intent = Intent(this, RegisterActivity::class.java)
-            startActivity(intent)
-        }
+        setupEmailValidation()
+        setupPasswordValidation()
 
         binding.darkMode.setOnCheckedChangeListener { _: CompoundButton, isChecked: Boolean ->
             if (isChecked) {
@@ -119,54 +38,38 @@ class LoginActivity : AppCompatActivity() {
                 saveTheme(false)
             }
         }
+
+        binding.signUp.setOnClickListener {
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.loginButton.setOnClickListener {
+            val email = binding.loginEmail.text.toString()
+            val password = binding.loginPassword.text.toString()
+
+            if (isInputValid(email, password)) {
+                login(email, password)
+            }
+        }
     }
 
     private fun login(email: String, password: String) {
         progressBar(true)
-
-        val request = LoginRequest(email, password)
-        val call = ApiConfig().getApi().loginUser(request)
-
-        call.enqueue(object : Callback<LoginResponse> {
-            override fun onResponse(
-                call: Call<LoginResponse>, response: Response<LoginResponse>
-            ) {
-                if (response.isSuccessful) {
-                    val token = response.body()?.token
-
-                    if (token != null) {
-                        val userEmail = response.body()?.email
-                        val userName = response.body()?.name
-                        val shared = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-                        with(shared.edit()) {
-                            putString("token", token)
-                            putString("email", userEmail)
-                            putString("name", userName)
-                            apply()
-                        }
-
-                        val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                        startActivity(intent)
-                        finish()
-                        progressBar(false)
-                    }
-
-                } else {
-                    val errorResponse = response.errorBody()?.string()
-                    val error = Gson().fromJson(errorResponse, LoginErrorResponse::class.java)
-                    val errorMessage = error?.message
-                    Toast.makeText(this@LoginActivity, errorMessage, Toast.LENGTH_SHORT).show()
-                    progressBar(false)
-                }
-            }
-
-            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                Toast.makeText(
-                    this@LoginActivity, getString(R.string.failServer), Toast.LENGTH_SHORT
-                ).show()
+        viewModel.login(
+            email,
+            password,
+            onSuccess = {
+                val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+                progressBar(false)
+            },
+            onFailure = { errorMessage ->
+                Toast.makeText(this@LoginActivity, errorMessage, Toast.LENGTH_SHORT).show()
                 progressBar(false)
             }
-        })
+        )
     }
 
     private fun getThemeApp() {
@@ -190,20 +93,76 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun progressBar(visible: Boolean) {
-        if (visible) {
-            binding.progressBar.visibility = View.VISIBLE
+    private fun setupEmailValidation() {
+        binding.loginEmail.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable?) {
+                validateEmail(s.toString().trim())
+            }
+        })
+    }
+
+    private fun setupPasswordValidation() {
+        binding.loginPassword.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {}
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                validatePassword(s.toString().trim())
+            }
+        })
+    }
+
+    private fun validateEmail(email: String) {
+        if (email.isNotEmpty()) {
+            if (!isValidEmail(email)) {
+                binding.emailLayout.error = getString(R.string.invalid_email)
+            } else {
+                binding.emailLayout.error = null
+            }
         } else {
-            binding.progressBar.visibility = View.GONE
+            binding.emailLayout.error = null
         }
+    }
+
+    private fun validatePassword(password: String) {
+        if (password.isNotEmpty()) {
+            if (password.length < 6 || !isValidPassword(password)) {
+                binding.passLayout.error = getString(R.string.invalid_password)
+            } else {
+                binding.passLayout.error = null
+            }
+        } else {
+            binding.passLayout.error = null
+        }
+    }
+
+    private fun isInputValid(email: String, password: String): Boolean {
+        var isValid = true
+
+        if (!isValidEmail(email)) {
+            binding.emailLayout.error = getString(R.string.invalid_email)
+            isValid = false
+        }
+
+        if (password.length < 6) {
+            binding.passLayout.error = getString(R.string.invalid_password)
+            isValid = false
+        }
+
+        return isValid
+    }
+
+    private fun progressBar(visible: Boolean) {
+        binding.progressBar.visibility = if (visible) View.VISIBLE else View.GONE
     }
 
     private fun isValidEmail(email: String): Boolean {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
-    }
-
-    private fun isValidPhone(phoneNumber: String): Boolean {
-        return phoneNumber.matches(Regex("\\d{10,}"))
     }
 
     private fun isValidPassword(password: String): Boolean {

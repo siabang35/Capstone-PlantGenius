@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.kotlin.aplantgenius.databinding.ActivityDetailBinding
 import com.kotlin.aplantgenius.main.MainActivity
-import java.io.File
 
 class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
@@ -15,10 +14,6 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        binding.backDetail.setOnClickListener {
-            finish()
-        }
 
         val image = intent.getByteArrayExtra("image")
         val penyakit = intent.getStringExtra("penyakit")
@@ -29,18 +24,21 @@ class DetailActivity : AppCompatActivity() {
 
         Glide.with(this)
             .load(image)
+            //.placeholder(R.drawable.placeholder_image)
+            //.error(R.drawable.error_image)
             .into(binding.imageDetail)
 
-        binding.btnHome.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
+        binding.backDetail.setOnClickListener {
             finish()
         }
 
         binding.btnCheck.setOnClickListener {
-            val intent = Intent(this, ScanActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+            finish()
+        }
+
+        binding.btnHome.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
             finish()
         }

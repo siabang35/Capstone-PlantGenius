@@ -27,22 +27,21 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val isDarkModeEnabled = isDarkModeEnabled()
-        binding.darkMode.isChecked = isDarkModeEnabled
-
         binding.started.setOnClickListener {
             val intent = Intent(requireContext(), ScanActivity::class.java)
             startActivity(intent)
         }
 
+        binding.darkMode.isChecked = isDarkModeEnabled()
         binding.darkMode.setOnCheckedChangeListener { _: CompoundButton, isChecked: Boolean ->
-            if (isChecked) {
+            val isDarkMode = if (isChecked) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                (activity as? MainActivity)?.saveTheme(true)
+                true
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                (activity as? MainActivity)?.saveTheme(false)
+                false
             }
+            (requireActivity() as? MainActivity)?.saveTheme(isDarkMode)
         }
     }
 

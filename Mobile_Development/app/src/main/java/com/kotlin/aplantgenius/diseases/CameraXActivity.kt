@@ -34,8 +34,7 @@ class CameraXActivity : AppCompatActivity() {
     }
 
     private fun takePhoto() {
-        binding.progressBar.visibility = View.VISIBLE
-
+        progressBar(true)
         val imageCapture = this.imageCapture ?: return
         val photoFile = createFile(application)
         val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
@@ -44,17 +43,17 @@ class CameraXActivity : AppCompatActivity() {
             outputOptions,
             ContextCompat.getMainExecutor(this),
             object : ImageCapture.OnImageSavedCallback {
+
                 override fun onError(exc: ImageCaptureException) {
                     Toast.makeText(
-                        this@CameraXActivity,
-                        getString(R.string.errorPhoto),
-                        Toast.LENGTH_SHORT
+                        this@CameraXActivity, getString(R.string.errorPhoto), Toast.LENGTH_SHORT
                     ).show()
-                    binding.progressBar.visibility = View.GONE
+                    progressBar(false)
                 }
 
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
                     val intent = Intent()
+
                     intent.putExtra("picture", photoFile)
                     intent.putExtra(
                         "isBackCamera",
@@ -62,7 +61,8 @@ class CameraXActivity : AppCompatActivity() {
                     )
                     setResult(ScanActivity.CAMERA_X_RESULT, intent)
                     finish()
-                    binding.progressBar.visibility = View.GONE
+
+                    progressBar(false)
                 }
             }
         )
@@ -83,19 +83,14 @@ class CameraXActivity : AppCompatActivity() {
             try {
                 cameraProvider.unbindAll()
                 cameraProvider.bindToLifecycle(
-                    this,
-                    cameraSelector,
-                    preview,
-                    imageCapture
+                    this, cameraSelector, preview, imageCapture
                 ).apply {
                     camera = this
                     cameraControl.enableFocus()
                 }
             } catch (exc: Exception) {
                 Toast.makeText(
-                    this@CameraXActivity,
-                    getString(R.string.errorCamera),
-                    Toast.LENGTH_SHORT
+                    this@CameraXActivity, getString(R.string.errorCamera), Toast.LENGTH_SHORT
                 ).show()
             }
         }, ContextCompat.getMainExecutor(this))
@@ -110,5 +105,8 @@ class CameraXActivity : AppCompatActivity() {
 
         startFocusAndMetering(action)
     }
-}
 
+    private fun progressBar(visible: Boolean) {
+        binding.progressBar.visibility = if (visible) View.VISIBLE else View.GONE
+    }
+}

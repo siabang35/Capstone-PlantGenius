@@ -6,100 +6,24 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.google.gson.Gson
 import com.kotlin.aplantgenius.R
-import com.kotlin.aplantgenius.data.*
 import com.kotlin.aplantgenius.databinding.ActivityRegisterBinding
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
+    private val viewModel: RegisterViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.apply {
-            registerName.addTextChangedListener(object : TextWatcher {
-                override fun afterTextChanged(s: Editable?) {
-                }
-
-                override fun beforeTextChanged(
-                    s: CharSequence?, start: Int, count: Int, after: Int
-                ) {
-                }
-
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    val name = s.toString().trim()
-
-                    if (name.isEmpty()) {
-                        nameLayout.error = getString(R.string.invalid_name)
-                    } else if (!isValidName(name)) {
-                        nameLayout.error = getString(R.string.invalid_nameNumber)
-                    } else {
-                        nameLayout.error = null
-                    }
-                }
-            })
-        }
-
-        binding.apply {
-            registerEmail.addTextChangedListener(object : TextWatcher {
-                override fun beforeTextChanged(
-                    s: CharSequence?, start: Int, count: Int, after: Int
-                ) {
-                }
-
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                }
-
-                override fun afterTextChanged(s: Editable?) {
-                    val email = s.toString().trim()
-
-                    if (email.isNotEmpty()) {
-                        if (!isValidEmail(email)) {
-                            emailLayout.error = getString(R.string.invalid_email)
-                            emailLayout.errorIconDrawable = null
-                        } else {
-                            emailLayout.error = null
-                        }
-                    } else {
-                        emailLayout.error = null
-                    }
-                }
-            })
-        }
-        binding.apply {
-            registerPassword.addTextChangedListener(object : TextWatcher {
-                override fun afterTextChanged(s: Editable?) {
-                }
-
-                override fun beforeTextChanged(
-                    s: CharSequence?, start: Int, count: Int, after: Int
-                ) {
-                }
-
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    val password = s.toString().trim()
-
-                    if (password.isNotEmpty()) {
-                        if (password.length < 6 || !isValidPassword(password)) {
-                            passLayout.error = getString(R.string.invalid_password)
-                            passLayout.errorIconDrawable = null
-                        } else {
-                            passLayout.error = null
-                        }
-                    } else {
-                        passLayout.error = null
-                    }
-                }
-            })
-        }
+        setupNameValidation()
+        setupEmailValidation()
+        setupPasswordValidation()
 
         binding.backButton.setOnClickListener {
             finish()
@@ -108,87 +32,132 @@ class RegisterActivity : AppCompatActivity() {
             finish()
         }
 
-        binding.apply {
-            registerButton.setOnClickListener {
-                val name = registerName.text.toString()
-                val email = registerEmail.text.toString()
-                val password = registerPassword.text.toString()
+        binding.registerButton.setOnClickListener {
+            val name = binding.registerName.text.toString()
+            val email = binding.registerEmail.text.toString()
+            val password = binding.registerPassword.text.toString()
 
-                if (name.isNotEmpty() && isValidEmail(email) && password.length >= 6) {
-                    register(name, email, password)
-                } else {
-                    if (!isValidName(name) || name.isEmpty()) {
-                        nameLayout.error = getString(R.string.invalid_name)
-                    }
-                    if (!isValidEmail(email)) {
-                        emailLayout.error = getString(R.string.invalid_email)
-                    }
-                    if (password.length < 6) {
-                        passLayout.error = getString(R.string.invalid_password)
-                    }
-                }
+            if (isInputValid(name, email, password)) {
+                register(name, email, password)
             }
         }
     }
 
     private fun register(name: String, email: String, password: String) {
         progressBar(true)
-
-        val request = RegisterRequest(name, email, password)
-        val call = ApiConfig().getApi().registerUser(request)
-
-        call.enqueue(object : Callback<RegisterResponse> {
-            override fun onResponse(
-                call: Call<RegisterResponse>, response: Response<RegisterResponse>
-            ) {
-                if (response.isSuccessful) {
-                    Toast.makeText(
-                        this@RegisterActivity, getString(R.string.accCreated), Toast.LENGTH_SHORT
-                    ).show()
-
-                    val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
-                    startActivity(intent)
-                    finish()
-                    progressBar(false)
-
-                } else {
-                    val errorResponse = response.errorBody()?.string()
-                    val error = Gson().fromJson(errorResponse, ErrorRegister::class.java)
-                    val errorMessage = error.details.getErrorMessage()
-                    Toast.makeText(this@RegisterActivity, errorMessage, Toast.LENGTH_SHORT).show()
-                    progressBar(false)
-                }
-            }
-
-            override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
-                Toast.makeText(
-                    this@RegisterActivity, getString(R.string.failServer), Toast.LENGTH_SHORT
-                ).show()
+        viewModel.register(
+            name,
+            email,
+            password,
+            onSuccess = {
+                Toast.makeText(this, getString(R.string.accCreated), Toast.LENGTH_SHORT).show()
+                val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
+                intent.flags =
+                    Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
+                finish()
                 progressBar(false)
+            },
+            onFailure = { errorMessage ->
+                Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
+                progressBar(false)
+            }
+        )
+    }
+
+    private fun setupNameValidation() {
+        binding.registerName.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {}
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                validateName(s.toString().trim())
             }
         })
     }
 
-    private fun ErrorDetails.getErrorMessage(): String {
-        val errorMessages = mutableListOf<String>()
+    private fun setupEmailValidation() {
+        binding.registerEmail.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
-        email?.message?.let { errorMessages.add(it) }
-        name?.message?.let { errorMessages.add(it) }
-        password?.message?.let { errorMessages.add(it) }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
 
-        val errorMessage = errorMessages.joinToString(" and ")
-        errorMessages.clear()
+            override fun afterTextChanged(s: Editable?) {
+                validateEmail(s.toString().trim())
+            }
+        })
+    }
 
-        return errorMessage
+    private fun setupPasswordValidation() {
+        binding.registerPassword.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {}
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                validatePassword(s.toString().trim())
+            }
+        })
+    }
+
+    private fun validateName(name: String) {
+        if (name.isEmpty()) {
+            binding.nameLayout.error = getString(R.string.invalid_name)
+        } else if (!isValidName(name)) {
+            binding.nameLayout.error = getString(R.string.invalid_nameNumber)
+        } else {
+            binding.nameLayout.error = null
+        }
+    }
+
+    private fun validateEmail(email: String) {
+        if (email.isNotEmpty()) {
+            if (!isValidEmail(email)) {
+                binding.emailLayout.error = getString(R.string.invalid_email)
+            } else {
+                binding.emailLayout.error = null
+            }
+        } else {
+            binding.emailLayout.error = null
+        }
+    }
+
+    private fun validatePassword(password: String) {
+        if (password.isNotEmpty()) {
+            if (password.length < 6 || !isValidPassword(password)) {
+                binding.passLayout.error = getString(R.string.invalid_password)
+            } else {
+                binding.passLayout.error = null
+            }
+        } else {
+            binding.passLayout.error = null
+        }
+    }
+
+    private fun isInputValid(name: String, email: String, password: String): Boolean {
+        var isValid = true
+
+        if (!isValidName(name) || name.isEmpty()) {
+            binding.nameLayout.error = getString(R.string.invalid_name)
+            isValid = false
+        }
+
+        if (!isValidEmail(email)) {
+            binding.emailLayout.error = getString(R.string.invalid_email)
+            isValid = false
+        }
+
+        if (password.length < 6) {
+            binding.passLayout.error = getString(R.string.invalid_password)
+            isValid = false
+        }
+
+        return isValid
     }
 
     private fun progressBar(visible: Boolean) {
-        if (visible) {
-            binding.progressBar.visibility = View.VISIBLE
-        } else {
-            binding.progressBar.visibility = View.GONE
-        }
+        binding.progressBar.visibility = if (visible) View.VISIBLE else View.GONE
     }
 
     private fun isValidName(name: String): Boolean {
