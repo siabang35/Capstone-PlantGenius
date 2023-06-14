@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/menu_home"
-        android:name="com.kotlin.aplantgenius.main.home.HomeFragment"
+        android:name="com.kotlin.aplantgenius.main.HomeFragment"
         android:label="Home"
         tools:layout="@layout/fragment_home" />
 
@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/menu_profile"
-        android:name="com.kotlin.aplantgenius.main.profile.ProfileFragment"
+        android:name="com.kotlin.aplantgenius.main.ProfileFragment"
         android:label="Profile"
         tools:layout="@layout/fragment_profile" />
 

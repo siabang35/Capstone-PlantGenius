@@ -21,7 +21,4 @@
     <color name="darkGreen700">#133D38</color>
     <color name="darkGray700">#434343</color>
     <color name="darkGray">#332E2E</color>
-
-    <color name="focus_box_color">#FFFFFF</color>
-    <color name="focus_box_color_focused">#BF9D58</color>
 </resources>

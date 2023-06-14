@@ -18,7 +18,6 @@ import retrofit2.Response
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
-    //private val viewModel: RegisterViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,32 +47,7 @@ class RegisterActivity : AppCompatActivity() {
                 }
             })
         }
-        binding.apply {
-            registerPhone.addTextChangedListener(object : TextWatcher {
-                override fun beforeTextChanged(
-                    s: CharSequence?, start: Int, count: Int, after: Int
-                ) {
-                }
 
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                }
-
-                override fun afterTextChanged(s: Editable?) {
-                    val phone = s.toString().trim()
-
-                    if (phone.isNotEmpty()) {
-                        if (!isValidPhone(phone)) {
-                            phoneLayout.error = getString(R.string.invalid_phone)
-                            phoneLayout.errorIconDrawable = null
-                        } else {
-                            phoneLayout.error = null
-                        }
-                    } else {
-                        phoneLayout.error = null
-                    }
-                }
-            })
-        }
         binding.apply {
             registerEmail.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(
@@ -137,18 +111,14 @@ class RegisterActivity : AppCompatActivity() {
         binding.apply {
             registerButton.setOnClickListener {
                 val name = registerName.text.toString()
-                val phone = registerPhone.text.toString()
                 val email = registerEmail.text.toString()
                 val password = registerPassword.text.toString()
 
-                if (name.isNotEmpty() && isValidPhone(phone) && isValidEmail(email) && password.length >= 6) {
-                    register(name, email, password, phone)
+                if (name.isNotEmpty() && isValidEmail(email) && password.length >= 6) {
+                    register(name, email, password)
                 } else {
                     if (!isValidName(name) || name.isEmpty()) {
                         nameLayout.error = getString(R.string.invalid_name)
-                    }
-                    if (!isValidPhone(phone)) {
-                        phoneLayout.error = getString(R.string.invalid_phone)
                     }
                     if (!isValidEmail(email)) {
                         emailLayout.error = getString(R.string.invalid_email)
@@ -161,10 +131,10 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    private fun register(name: String, email: String, password: String, phone: String) {
+    private fun register(name: String, email: String, password: String) {
         progressBar(true)
 
-        val request = RegisterRequest(name, email, password, phone)
+        val request = RegisterRequest(name, email, password)
         val call = ApiConfig().getApi().registerUser(request)
 
         call.enqueue(object : Callback<RegisterResponse> {
@@ -204,7 +174,6 @@ class RegisterActivity : AppCompatActivity() {
         val errorMessages = mutableListOf<String>()
 
         email?.message?.let { errorMessages.add(it) }
-        phone?.getOrNull(0)?.message?.let { errorMessages.add(it) }
         name?.message?.let { errorMessages.add(it) }
         password?.message?.let { errorMessages.add(it) }
 
@@ -227,10 +196,6 @@ class RegisterActivity : AppCompatActivity() {
         return name.matches(pattern)
     }
 
-    private fun isValidPhone(phoneNumber: String): Boolean {
-        return phoneNumber.matches(Regex("\\d{10,}"))
-    }
-
     private fun isValidEmail(email: String): Boolean {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
@@ -240,5 +205,3 @@ class RegisterActivity : AppCompatActivity() {
         return pattern.matches(password)
     }
 }
-
-

@@ -17,7 +17,6 @@
         <item name="colorOnTertiary">@color/darkGreen700</item>
         <item name="colorTertiary">@color/turquoiseGreen</item>
         <item name="colorOnContainer">@color/darkRed</item>
-
     </style>
 
     <style name="TextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">

@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.APlantGenius"
         android:usesCleartextTraffic="true"
-        tools:targetApi="31">
+        tools:targetApi="33">
         <activity
             android:name=".auth.RegisterActivity"
             android:exported="false" />
@@ -27,23 +27,19 @@
             android:name=".auth.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".diseases.detail.DetailActivity"
+            android:name=".diseases.DetailActivity"
             android:exported="false" />
         <activity
-            android:name=".diseases.check.CheckActivity"
+            android:name=".diseases.ScanActivity"
             android:exported="false" />
         <activity
-            android:name=".diseases.scan.ScanActivity"
-            android:exported="false" />
-        <activity
-            android:name=".diseases.scan.CameraXActivity"
+            android:name=".diseases.CameraXActivity"
             android:exported="false" />
         <activity
             android:name=".main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

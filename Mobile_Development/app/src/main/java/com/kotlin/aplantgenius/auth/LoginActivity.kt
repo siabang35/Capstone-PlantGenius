@@ -25,7 +25,6 @@ import retrofit2.Response
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
-    //private val viewModel: LoginViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -133,14 +132,19 @@ class LoginActivity : AppCompatActivity() {
                 call: Call<LoginResponse>, response: Response<LoginResponse>
             ) {
                 if (response.isSuccessful) {
-                    val token = response.body()?.toString()
+                    val token = response.body()?.token
 
                     if (token != null) {
+                        val userEmail = response.body()?.email
+                        val userName = response.body()?.name
                         val shared = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
                         with(shared.edit()) {
                             putString("token", token)
+                            putString("email", userEmail)
+                            putString("name", userName)
                             apply()
                         }
+
                         val intent = Intent(this@LoginActivity, MainActivity::class.java)
                         startActivity(intent)
                         finish()

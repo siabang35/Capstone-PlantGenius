@@ -1,4 +1,4 @@
-package com.kotlin.aplantgenius.main.home
+package com.kotlin.aplantgenius.main
 
 import android.content.Intent
 import android.content.res.Configuration
@@ -10,8 +10,7 @@ import android.widget.CompoundButton
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import com.kotlin.aplantgenius.databinding.FragmentHomeBinding
-import com.kotlin.aplantgenius.diseases.scan.ScanActivity
-import com.kotlin.aplantgenius.main.MainActivity
+import com.kotlin.aplantgenius.diseases.ScanActivity
 
 class HomeFragment : Fragment() {
 
