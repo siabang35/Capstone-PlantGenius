@@ -74,6 +74,8 @@ class ScanActivity : AppCompatActivity() {
         progressBar(true)
         withContext(Dispatchers.IO) {
             val fileCompress = compress(file)
+            val fileBytes = fileCompress.readBytes()
+
             val base64 = base64(fileCompress)
 
             val request = ImageRequest(base64)
@@ -97,7 +99,9 @@ class ScanActivity : AppCompatActivity() {
                             ).show()
                             progressBar(false)
 
+
                             val intent = Intent(this@ScanActivity, DetailActivity::class.java)
+                            intent.putExtra("image", fileBytes)
                             intent.putExtra("penyakit", predictionResponse.penyakit)
                             intent.putExtra("penanganan", predictionResponse.penanganan)
                             startActivity(intent)
