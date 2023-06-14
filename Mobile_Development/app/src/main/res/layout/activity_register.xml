@@ -84,22 +84,6 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/phoneLayout"
-                    style="@style/TextInputLayoutStyle"
-                    android:layout_marginTop="5dp"
-                    app:startIconDrawable="@drawable/ic_baseline_phone_24">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/registerPhone"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:hint="@string/noPhone"
-                        android:inputType="phone"
-                        tools:ignore="SpeakableTextPresentCheck" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/emailLayout"
                     style="@style/TextInputLayoutStyle"
                     android:layout_marginTop="5dp"
@@ -158,8 +142,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:src="@drawable/image_background"
         android:elevation="0dp"
+        android:src="@drawable/image_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

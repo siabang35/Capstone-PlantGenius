@@ -1,4 +1,4 @@
-package com.kotlin.aplantgenius.diseases.scan
+package com.kotlin.aplantgenius.diseases
 
 import android.Manifest
 import android.content.Context
@@ -8,21 +8,20 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.google.gson.Gson
 import com.kotlin.aplantgenius.R
 import com.kotlin.aplantgenius.data.*
 import com.kotlin.aplantgenius.databinding.ActivityScanBinding
-import com.kotlin.aplantgenius.diseases.check.CheckActivity
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
+import retrofit2.Response
 import java.io.File
 
 class ScanActivity : AppCompatActivity() {
@@ -55,43 +54,74 @@ class ScanActivity : AppCompatActivity() {
             val sharedPref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
             val myToken = sharedPref.getString("token", null)
 
-            CoroutineScope(Dispatchers.Main).launch {
-                uploadImage(myToken, getFile!!)
-
-                val intent = Intent(this@ScanActivity, CheckActivity::class.java)
-                startActivity(intent)
+            if (getFile != null) {
+                CoroutineScope(Dispatchers.Main).launch {
+                    uploadImage(myToken.toString(), getFile!!)
+                }
+            } else {
+                Toast.makeText(
+                    applicationContext,
+                    getString(R.string.noImage),
+                    Toast.LENGTH_SHORT
+                ).show()
+                progressBar(false)
             }
         }
     }
 
-    private suspend fun uploadImage(token: String?, file: File) {
+    private suspend fun uploadImage(token: String, file: File) {
+
+        progressBar(true)
         withContext(Dispatchers.IO) {
             val fileCompress = compress(file)
             val base64 = base64(fileCompress)
-            val call = ApiConfig().getApi().scanImage("Bearer $token", imageBase64 = base64)
+
+            val request = ImageRequest(base64)
+
+            val apiService = ApiConfig().getApi()
+            val call = apiService.scanImage(token, request)
+
             call.enqueue(object : Callback<ImageResponse> {
                 override fun onResponse(
                     call: Call<ImageResponse>,
-                    response: retrofit2.Response<ImageResponse>
+                    response: Response<ImageResponse>
                 ) {
                     if (response.isSuccessful) {
-                        val imageResponse = response.body()
-                        if (imageResponse != null && !imageResponse.error) {
-                            Toast.makeText(applicationContext, "Sukses", Toast.LENGTH_SHORT).show()
-                        } else {
-                            Toast.makeText(applicationContext, "Gagal", Toast.LENGTH_SHORT).show()
+                        val predictionResponse = response.body()
+
+                        if (predictionResponse != null) {
+                            Toast.makeText(
+                                applicationContext,
+                                predictionResponse.penyakit,
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            progressBar(false)
+
+                            val intent = Intent(this@ScanActivity, DetailActivity::class.java)
+                            intent.putExtra("penyakit", predictionResponse.penyakit)
+                            intent.putExtra("penanganan", predictionResponse.penanganan)
+                            startActivity(intent)
                         }
+
                     } else {
-                        Toast.makeText(applicationContext, "Kegagalan", Toast.LENGTH_SHORT).show()
+                        val errorResponse = response.errorBody()?.string()
+                        val error = Gson().fromJson(errorResponse, ErrorImage::class.java)
+                        val errorMessage = error?.message
+                        Toast.makeText(applicationContext, errorMessage, Toast.LENGTH_SHORT).show()
+                        progressBar(false)
                     }
                 }
 
                 override fun onFailure(call: Call<ImageResponse>, t: Throwable) {
-                    Toast.makeText(applicationContext, "Kesalahan", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        applicationContext, getString(R.string.failServer), Toast.LENGTH_SHORT
+                    ).show()
+                    progressBar(false)
                 }
             })
         }
     }
+
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<String>,
@@ -142,10 +172,14 @@ class ScanActivity : AppCompatActivity() {
 
             val isBackCamera = it.data?.getBooleanExtra("isBackCamera", true) as Boolean
 
-            myFile?.let { file ->
-                rotateFile(file, isBackCamera)
-                getFile = file
-                binding.previewImageView.setImageBitmap(BitmapFactory.decodeFile(file.path))
+            runOnUiThread {
+                progressBar(true)
+                myFile?.let { file ->
+                    rotateFile(file, isBackCamera)
+                    getFile = file
+                    binding.previewImageView.setImageBitmap(BitmapFactory.decodeFile(file.path))
+                    progressBar(false)
+                }
             }
         }
     }
@@ -155,10 +189,15 @@ class ScanActivity : AppCompatActivity() {
     ) { result ->
         if (result.resultCode == RESULT_OK) {
             val selectedImg = result.data?.data as Uri
-            selectedImg.let { uri ->
-                val myFile = uriToFile(uri, this)
-                getFile = myFile
-                binding.previewImageView.setImageURI(uri)
+
+            runOnUiThread {
+                progressBar(true)
+                selectedImg.let { uri ->
+                    val myFile = uriToFile(uri, this)
+                    getFile = myFile
+                    binding.previewImageView.setImageURI(uri)
+                    progressBar(false)
+                }
             }
         }
     }
@@ -174,6 +213,14 @@ class ScanActivity : AppCompatActivity() {
         if (!imagePath.isNullOrEmpty()) {
             getFile = File(imagePath)
             binding.previewImageView.setImageBitmap(BitmapFactory.decodeFile(imagePath))
+        }
+    }
+
+    private fun progressBar(visible: Boolean) {
+        if (visible) {
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.progressBar.visibility = View.GONE
         }
     }
 

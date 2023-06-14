@@ -1,10 +1,9 @@
-package com.kotlin.aplantgenius.diseases.detail
+package com.kotlin.aplantgenius.diseases
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.kotlin.aplantgenius.databinding.ActivityDetailBinding
-import com.kotlin.aplantgenius.diseases.scan.ScanActivity
 import com.kotlin.aplantgenius.main.MainActivity
 
 class DetailActivity : AppCompatActivity() {
@@ -18,6 +17,12 @@ class DetailActivity : AppCompatActivity() {
         binding.backDetail.setOnClickListener {
             finish()
         }
+
+        val penyakit = intent.getStringExtra("penyakit")
+        val penanganan = intent.getStringExtra("penanganan")
+
+        binding.diseaseName.text = penyakit
+        binding.diseaseDesc.text = penanganan
 
         binding.btnHome.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)

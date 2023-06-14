@@ -11,7 +11,11 @@ data class LoginRequest(
 
 data class LoginResponse(
     @SerializedName("token")
-    val token: String
+    val token: String,
+    @SerializedName("email")
+    val email: String,
+    @SerializedName("name")
+    val name: String,
 )
 
 data class LoginErrorResponse(
@@ -19,18 +23,17 @@ data class LoginErrorResponse(
     val message: String
 )
 
+data class LogoutResponse(
+    val message: String
+)
+
 data class RegisterRequest(
     @SerializedName("name")
     val name: String,
-
     @SerializedName("email")
     val email: String,
-
     @SerializedName("password")
     val password: String,
-
-    @SerializedName("no_telepon")
-    val phone: String
 )
 
 data class RegisterResponse(
@@ -41,22 +44,14 @@ data class RegisterResponse(
 data class User(
     @SerializedName("id")
     val id: Int,
-
     @SerializedName("name")
     val name: String,
-
     @SerializedName("email")
     val email: String,
-
     @SerializedName("password")
     val password: String,
-
-    @SerializedName("no_telepon")
-    val phone: String,
-
     @SerializedName("updatedAt")
     val updatedAt: String,
-
     @SerializedName("createdAt")
     val createdAt: String
 )
@@ -64,7 +59,6 @@ data class User(
 data class ErrorRegister(
     @SerializedName("message")
     val message: String,
-
     @SerializedName("details")
     val details: ErrorDetails
 )
@@ -72,13 +66,8 @@ data class ErrorRegister(
 data class ErrorDetails(
     @SerializedName("email")
     val email: ErrorMessage?,
-
-    @SerializedName("no_telepon")
-    val phone: List<ErrorMessage>?,
-
     @SerializedName("name")
     val name: ErrorMessage?,
-
     @SerializedName("password")
     val password: ErrorMessage?
 )
@@ -88,12 +77,19 @@ data class ErrorMessage(
     val message: String
 )
 
+data class ImageResponse(
+    @SerializedName("penyakit")
+    val penyakit: String,
+    @SerializedName("penanganan")
+    val penanganan: String
+)
+
 data class ImageRequest(
+    @SerializedName("imageBase64")
     val imageBase64: String
 )
 
-data class ImageResponse(
-    val message: String,
-    val error: Boolean
+data class ErrorImage(
+    val error: String,
+    val message: String
 )
-
