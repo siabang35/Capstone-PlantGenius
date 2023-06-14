@@ -41,7 +41,6 @@ class ProfileFragment : Fragment() {
         if (token != null) {
             binding.logoutButton.setOnClickListener {
                 logout(token)
-
                 with(sharedPref.edit()) {
                     remove("token")
                     remove("email")
@@ -71,7 +70,9 @@ class ProfileFragment : Fragment() {
                         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
                     }
                 } else {
-                    Toast.makeText(requireContext(), "Terjadi Kesalahan", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(), getString(R.string.anError), Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
 
@@ -83,3 +84,4 @@ class ProfileFragment : Fragment() {
         })
     }
 }
+
