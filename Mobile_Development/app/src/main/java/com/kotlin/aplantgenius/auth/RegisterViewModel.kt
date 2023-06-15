@@ -10,7 +10,6 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class RegisterViewModel(application: Application) : AndroidViewModel(application) {
-
     fun register(
         name: String,
         email: String,

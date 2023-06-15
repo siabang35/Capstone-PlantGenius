@@ -7,22 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.gson.Gson
 import com.kotlin.aplantgenius.R
-import com.kotlin.aplantgenius.data.ApiConfig
-import com.kotlin.aplantgenius.data.ErrorResponse
-import com.kotlin.aplantgenius.data.HistoryResponse
-import com.kotlin.aplantgenius.data.ListHistory
 import com.kotlin.aplantgenius.databinding.FragmentHistoryBinding
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class HistoryFragment : Fragment() {
 
     private lateinit var binding: FragmentHistoryBinding
     private lateinit var adapter: HistoryAdapter
+    private val viewModel: HistoryViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,44 +50,19 @@ class HistoryFragment : Fragment() {
         val token = sharedPref.getString("token", null)
 
         progressBar(true)
-        val apiService = ApiConfig().getApi()
-        val call = apiService.getHistory(token.toString())
 
-        call.enqueue(object : Callback<HistoryResponse> {
-            override fun onResponse(
-                call: Call<HistoryResponse>,
-                response: Response<HistoryResponse>
-            ) {
-                if (response.isSuccessful) {
-                    val historyResponse = response.body()?.history
-                    if (historyResponse != null) {
-                        val listHistory = historyResponse.map {
-                            ListHistory(
-                                it.id,
-                                it.result,
-                                it.image,
-                                null
-                            )
-                        }
-                        adapter.setList(listHistory)
-                        progressBar(false)
-                    }
-                } else {
-                    val errorResponse = response.errorBody()?.string()
-                    val error = Gson().fromJson(errorResponse, ErrorResponse::class.java)
-                    val errorMessage = error.message
-                    Toast.makeText(
-                        requireContext(), errorMessage, Toast.LENGTH_SHORT
-                    ).show()
-                    progressBar(false)
-                }
-            }
+        viewModel.getHistory(token.toString(), { listHistory ->
+            adapter.setList(listHistory)
+            progressBar(false)
 
-            override fun onFailure(call: Call<HistoryResponse>, t: Throwable) {
-                Toast.makeText(requireContext(), getString(R.string.failServer), Toast.LENGTH_SHORT)
-                    .show()
-                progressBar(false)
+            if (listHistory.isEmpty()) {
+                binding.tvEmptyHistory.visibility = View.VISIBLE
+            } else {
+                binding.tvEmptyHistory.visibility = View.GONE
             }
+        }, { errorMessage ->
+            Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
+            progressBar(false)
         })
     }
 
