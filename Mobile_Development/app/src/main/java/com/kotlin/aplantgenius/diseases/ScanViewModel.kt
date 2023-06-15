@@ -11,7 +11,6 @@ import retrofit2.Response
 import java.io.File
 
 class ScanViewModel(application: Application) : AndroidViewModel(application) {
-
     suspend fun uploadImage(
         token: String,
         file: File,
@@ -37,7 +36,7 @@ class ScanViewModel(application: Application) : AndroidViewModel(application) {
                     }
                 } else {
                     val errorResponse = response.errorBody()?.string()
-                    val error = Gson().fromJson(errorResponse, ErrorImage::class.java)
+                    val error = Gson().fromJson(errorResponse, ErrorResponse::class.java)
                     val errorMessage = error.message
                     onFailure(errorMessage)
                 }

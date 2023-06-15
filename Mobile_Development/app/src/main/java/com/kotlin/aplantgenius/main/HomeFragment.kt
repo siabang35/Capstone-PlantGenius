@@ -44,7 +44,6 @@ class HomeFragment : Fragment() {
             (requireActivity() as? MainActivity)?.saveTheme(isDarkMode)
         }
     }
-
     private fun isDarkModeEnabled(): Boolean {
         val currentNightMode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
         return currentNightMode == Configuration.UI_MODE_NIGHT_YES

@@ -63,23 +63,25 @@ class ProfileFragment : Fragment() {
                 call: Call<LogoutResponse>,
                 response: retrofit2.Response<LogoutResponse>
             ) {
-                if (response.isSuccessful) {
-                    val logoutResponse = response.body()
-                    logoutResponse?.let {
-                        val message = it.message
-                        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                if (isAdded) {
+                    if (response.isSuccessful) {
+                        val logoutResponse = response.body()
+                        logoutResponse?.let {
+                            val message = it.message
+                            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                        }
+                    } else {
+                        Toast.makeText(requireContext(), getString(R.string.anError), Toast.LENGTH_SHORT).show()
                     }
-                } else {
-                    Toast.makeText(
-                        requireContext(), getString(R.string.anError), Toast.LENGTH_SHORT
-                    ).show()
                 }
             }
 
             override fun onFailure(call: Call<LogoutResponse>, t: Throwable) {
-                Toast.makeText(
-                    requireContext(), getString(R.string.failServer), Toast.LENGTH_SHORT
-                ).show()
+                if (isAdded) {
+                    Toast.makeText(
+                        requireContext(), getString(R.string.failServer), Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
         })
     }

@@ -20,4 +20,15 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Body request: ImageRequest
     ): Call<ImageResponse>
+
+    @GET("/getHistory")
+    fun getHistory(
+        @Header("Authorization") token: String
+    ): Call<HistoryResponse>
+
+    @GET("/getHistory/{id}")
+    fun getHistoryById(
+        @Header("Authorization") token: String,
+        @Path("id") id: Int
+    ): Call<DetailResponse>
 }
