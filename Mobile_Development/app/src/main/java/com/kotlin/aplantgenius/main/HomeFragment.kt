@@ -9,12 +9,15 @@ import android.view.ViewGroup
 import android.widget.CompoundButton
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.kotlin.aplantgenius.data.HomeInfo
 import com.kotlin.aplantgenius.databinding.FragmentHomeBinding
 import com.kotlin.aplantgenius.diseases.ScanActivity
 
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
+    private lateinit var adapter: HomeAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,7 +46,14 @@ class HomeFragment : Fragment() {
             }
             (requireActivity() as? MainActivity)?.saveTheme(isDarkMode)
         }
+
+        val infoHome = HomeInfo.info
+        adapter = HomeAdapter(infoHome)
+        binding.rvHome.adapter = adapter
+        binding.rvHome.layoutManager = LinearLayoutManager(requireContext())
+
     }
+
     private fun isDarkModeEnabled(): Boolean {
         val currentNightMode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
         return currentNightMode == Configuration.UI_MODE_NIGHT_YES

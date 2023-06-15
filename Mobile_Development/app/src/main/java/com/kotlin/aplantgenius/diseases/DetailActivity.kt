@@ -74,7 +74,7 @@ class DetailActivity : AppCompatActivity() {
 
     private fun setDetail(detail: ListHistory?) {
         if (detail != null) {
-            binding.diseaseName.text = detail.result
+            binding.diseaseName.text = detail.name
             binding.diseaseDesc.text = detail.desc
 
             Glide.with(this@DetailActivity)

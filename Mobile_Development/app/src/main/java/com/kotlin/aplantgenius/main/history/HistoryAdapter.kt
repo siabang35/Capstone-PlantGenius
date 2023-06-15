@@ -45,7 +45,7 @@ class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
                 Glide.with(itemView.context)
                     .load(history.image)
                     .into(ivPhoto)
-                tvName.text = history.result
+                tvName.text = history.name
 
                 root.setOnClickListener {
                     val intent = Intent(root.context, DetailActivity::class.java).apply {

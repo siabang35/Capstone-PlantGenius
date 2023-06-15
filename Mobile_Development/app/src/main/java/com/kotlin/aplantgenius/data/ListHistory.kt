@@ -6,8 +6,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class ListHistory(
     val id: Int?,
-    val result: String?,
+    val name: String?,
     val image: String?,
     val desc: String?
 ) : Parcelable
-
