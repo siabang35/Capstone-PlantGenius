@@ -24,6 +24,7 @@ data class LoginErrorResponse(
 )
 
 data class LogoutResponse(
+    @SerializedName("message")
     val message: String
 )
 
@@ -81,7 +82,9 @@ data class ImageResponse(
     @SerializedName("penyakit")
     val penyakit: String,
     @SerializedName("penanganan")
-    val penanganan: String
+    val penanganan: String,
+    @SerializedName("imageUrl")
+    val image: String
 )
 
 data class ImageRequest(
@@ -89,7 +92,32 @@ data class ImageRequest(
     val imageBase64: String
 )
 
-data class ErrorImage(
+data class ErrorResponse(
     val error: String,
     val message: String
+)
+
+data class HistoryResponse(
+    @SerializedName("history")
+    val history: List<History>
+)
+
+data class History(
+    @SerializedName("id")
+    val id: Int,
+    @SerializedName("result")
+    val result: String,
+    @SerializedName("imageUrl")
+    val image: String
+)
+
+data class DetailResponse(
+    @SerializedName("id")
+    val id: Int,
+    @SerializedName("penyakit")
+    val penyakit: String,
+    @SerializedName("penanganan")
+    val penanganan: String,
+    @SerializedName("imageUrl")
+    val image: String
 )

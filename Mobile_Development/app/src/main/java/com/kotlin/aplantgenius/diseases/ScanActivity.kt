@@ -65,21 +65,24 @@ class ScanActivity : AppCompatActivity() {
 
         progressBar(true)
         CoroutineScope(Dispatchers.Main).launch {
-            val fileCompress = compress(getFile!!)
-            val image = fileCompress.readBytes()
 
             viewModel.uploadImage(token.toString(), getFile!!,
-                onSuccess = { predictionResponse ->
+                onSuccess = {
                     Toast.makeText(
-                        applicationContext, predictionResponse.penyakit, Toast.LENGTH_SHORT
+                        applicationContext, it.penyakit, Toast.LENGTH_SHORT
                     ).show()
-                    progressBar(false)
 
-                    val intent = Intent(this@ScanActivity, DetailActivity::class.java)
-                    intent.putExtra("image", image)
-                    intent.putExtra("penyakit", predictionResponse.penyakit)
-                    intent.putExtra("penanganan", predictionResponse.penanganan)
+                    val intent = Intent(this@ScanActivity, DetailActivity::class.java).apply {
+                        val bundle = Bundle().apply {
+                            putString(DetailActivity.EXTRA_NAME, it.penyakit)
+                            putString(DetailActivity.EXTRA_DESC, it.penanganan)
+                            putString(DetailActivity.EXTRA_IMG, it.image)
+                        }
+                        putExtras(bundle)
+                    }
                     startActivity(intent)
+
+                    progressBar(false)
                 },
                 onFailure = { errorMessage ->
                     Toast.makeText(applicationContext, errorMessage, Toast.LENGTH_SHORT)

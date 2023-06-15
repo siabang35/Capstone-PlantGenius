@@ -73,7 +73,7 @@ suspend fun compress(file: File): File = withContext(Dispatchers.IO) {
     val bitmap = BitmapFactory.decodeFile(file.path)
 
     val targetFileSize = 800 * 1024
-    var compressQuality = 90
+    var compressQuality = 80
     var streamLength: Int
 
     do {
@@ -93,7 +93,7 @@ suspend fun base64(file: File): String = withContext(Dispatchers.IO) {
     val bitmap = BitmapFactory.decodeFile(file.path)
 
     val outputStream = ByteArrayOutputStream()
-    bitmap.compress(Bitmap.CompressFormat.JPEG, 70, outputStream)
+    bitmap.compress(Bitmap.CompressFormat.JPEG, 60, outputStream)
     val byteArray = outputStream.toByteArray()
 
     val base64Image = Base64.encodeToString(byteArray, Base64.NO_WRAP)
