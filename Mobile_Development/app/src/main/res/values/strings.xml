@@ -37,6 +37,7 @@
     <string name="five_history">5 RIWAYAT DETEKSI ANDA</string>
     <string name="subscribe_desc">Jika Anda ingin mendeteksi tanaman yang lebih banyak silahkan BERLANGGANAN sekarang juga dan dapatkan semua FITUR dari Aplikasi kami!</string>
     <string name="subscribe">LANGGANAN SEKARANG!</string>
+    <string name="noHistory">History Anda masih kosong</string>
 
     <string name="home_desc">Plant Genius Apps akan membantu Anda dalam menganalisis keadaan dari tanaman Anda secara akurat dan temukan solusi terbaik dari penyakit tanaman Anda.</string>
     <string name="scan_now">Scan now!</string>

@@ -27,7 +27,6 @@ class DetailActivity : AppCompatActivity() {
         val desc = extras?.getString(EXTRA_DESC)
         val image = extras?.getString(EXTRA_IMG)
 
-
         if (image != null || name != null || desc != null) {
             binding.diseaseName.text = name
             binding.diseaseDesc.text = desc
@@ -75,14 +74,12 @@ class DetailActivity : AppCompatActivity() {
 
     private fun setDetail(detail: ListHistory?) {
         if (detail != null) {
-            binding.apply {
-                binding.diseaseName.text = detail.result
-                binding.diseaseDesc.text = detail.desc
+            binding.diseaseName.text = detail.result
+            binding.diseaseDesc.text = detail.desc
 
-                Glide.with(this@DetailActivity)
-                    .load(detail.image)
-                    .into(binding.imageDetail)
-            }
+            Glide.with(this@DetailActivity)
+                .load(detail.image)
+                .into(binding.imageDetail)
         }
     }
 

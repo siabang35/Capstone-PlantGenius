@@ -55,7 +55,6 @@ class DetailViewModel(application: Application) : AndroidViewModel(application) 
             }
 
             override fun onFailure(call: Call<DetailResponse>, t: Throwable) {
-                _isLoading.value = false
                 Toast.makeText(
                     getApplication(),
                     getApplication<Application>().getString(R.string.failServer),
