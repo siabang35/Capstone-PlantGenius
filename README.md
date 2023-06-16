@@ -14,7 +14,7 @@ We are C23-PS187 product-based capstone project team, consisting of 6 members in
   2. A316DSX1123 - Retno Adi Saputra - Universitas Perwira Purbalingga
 
 ## The Project Overview  
-Commodity plant diseases aŦect crop yield and quality, causing signiůcant economic losses in agriculture. Traditional methods for detecting commodity plant diseases rely on visual inspection, which can be time-consuming and require expertise. Recent advancements in computer vision and deep learning techniques have shown potential in providing an accurate and efficient solution to commodity plant disease detection. The proposed project aims to leverage these advancements and develop an automated system for plant disease detection that can be easily deployed in the real world.
+Commodity plant diseases affect crop yield and quality, causing significant economic losses in agriculture. Traditional methods for detecting commodity plant diseases rely on visual inspection, which can be time-consuming and require expertise. Recent advancements in computer vision and deep learning techniques have shown potential in providing an accurate and efficient solution to commodity plant disease detection. The proposed project aims to leverage these advancements and develop an automated system for plant disease detection that can be easily deployed in the real world.
 
 ## The Project Scope  
 Each of learning path in this team works collaboratively to deliver the product within the scope below:  
