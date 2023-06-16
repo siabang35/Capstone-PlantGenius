@@ -55,11 +55,9 @@ class HistoryFragment : Fragment() {
             adapter.setList(listHistory)
             progressBar(false)
 
-            if (listHistory.isEmpty()) {
-                binding.tvEmptyHistory.visibility = View.VISIBLE
-            } else {
-                binding.tvEmptyHistory.visibility = View.GONE
-            }
+            binding.tvEmptyHistory.visibility =
+                if (listHistory.isEmpty()) View.VISIBLE else View.GONE
+
         }, { errorMessage ->
             Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
             progressBar(false)
