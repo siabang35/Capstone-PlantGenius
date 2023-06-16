@@ -22,6 +22,16 @@
         tools:targetApi="33">
 
         <activity
+            android:name=".main.SplashScreen"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
             android:name=".auth.RegisterActivity"
             android:exported="false" />
         <activity
@@ -38,12 +48,7 @@
             android:exported="false" />
         <activity
             android:name=".main.MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="true" />
 
     </application>
 </manifest>

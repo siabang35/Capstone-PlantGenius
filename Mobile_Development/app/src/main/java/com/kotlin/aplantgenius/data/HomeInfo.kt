@@ -1,5 +1,4 @@
 package com.kotlin.aplantgenius.data
-
 object HomeInfo {
     val info = listOf(
         ListHistory(
@@ -17,22 +16,22 @@ object HomeInfo {
         ),
         ListHistory(
             id = 2,
-            name = "Harga Pasar",
+            name = "Tanaman Yang Dapat Kamu Periksa",
             image = "https://wahananews.co/photo/berita/dir062022/jual-hasil-pertanian-secara-online-rizal-raih-omzet-rp-50-juta-per-bulan_3ZSzmTA1pt.jpg",
-            desc = "1. Banana      Rp.35.000/kg \n" +
-                    "2. Cacao        Rp.25.000/kg \n" +
-                    "3. Cassava    Rp.30.000/kg \n" +
-                    "4. Coffee       Rp.25.000/kg \n" +
-                    "5. Corn           Rp.15.000/kg \n" +
-                    "6. Guava       Rp.10.500/kg \n" +
-                    "7. Mango     Rp.25.000/kg \n" +
-                    "8. Orange     Rp.30.000/kg \n" +
-                    "9. Potato      Rp.15.500/kg \n" +
-                    "10. Rice        Rp.15.000/kg \n" +
-                    "11. Soybean  Rp.30.000/kg \n" +
-                    "12. Squash    Rp.30.000/kg \n" +
-                    "13. Tea          Rp.42.000/kg \n" +
-                    "14. Tomato   Rp.30.000/kg "
+            desc = "1. Banana \n" +
+                    "2. Cacao \n" +
+                    "3. Cassava \n" +
+                    "4. Coffee \n" +
+                    "5. Corn \n" +
+                    "6. Guava \n" +
+                    "7. Mango  \n" +
+                    "8. Orange \n" +
+                    "9. Potato \n" +
+                    "10. Rice \n" +
+                    "11. Soybean \n" +
+                    "12. Squash \n" +
+                    "13. Tea \n" +
+                    "14. Tomato "
         )
     )
 }

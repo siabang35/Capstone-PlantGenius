@@ -28,6 +28,7 @@ class DetailActivity : AppCompatActivity() {
         val image = extras?.getString(EXTRA_IMG)
 
         if (image != null || name != null || desc != null) {
+            progressBar(true)
             binding.diseaseName.text = name
             binding.diseaseDesc.text = desc
 
@@ -35,6 +36,7 @@ class DetailActivity : AppCompatActivity() {
                 .load(image)
                 .error(R.drawable.image_detail)
                 .into(binding.imageDetail)
+            progressBar(false)
         }
 
         val sharedPref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
@@ -42,8 +44,6 @@ class DetailActivity : AppCompatActivity() {
 
         if (ids != null) {
             val id = ids.toInt()
-            viewModel.getDetail(token, id)
-
             viewModel.isLoading.observe(this) { isLoading ->
                 binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
             }
@@ -51,6 +51,8 @@ class DetailActivity : AppCompatActivity() {
             viewModel.detailHistory.observe(this) {
                 setDetail(it)
             }
+
+            viewModel.getDetail(token, id)
         }
 
         binding.backDetail.setOnClickListener {
@@ -74,13 +76,19 @@ class DetailActivity : AppCompatActivity() {
 
     private fun setDetail(detail: ListHistory?) {
         if (detail != null) {
-            binding.diseaseName.text = detail.name
-            binding.diseaseDesc.text = detail.desc
-
+            progressBar(true)
             Glide.with(this@DetailActivity)
                 .load(detail.image)
                 .into(binding.imageDetail)
+
+            binding.diseaseName.text = detail.name
+            binding.diseaseDesc.text = detail.desc
+            progressBar(false)
         }
+    }
+
+    private fun progressBar(visible: Boolean) {
+        binding.progressBar.visibility = if (visible) View.VISIBLE else View.GONE
     }
 
     companion object {
