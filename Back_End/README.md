@@ -1,3 +1,11 @@
+# Cloud Computing Job Desk
+
+- Deploy Machine Learning model on Google Cloud Platform using Compute Engine
+- Create SQL instance to store data and connect to compute engine via private IP Address
+- Create connector using Serverless VPC Access
+- Create endpoints for login, register, search cake, send the result of machine learning process and to give informations about the cake to frontend
+- Create cloud storage to store cake images
+
 # plant-genius-server
 server for plant genius application
 # RESTAPIDocs
